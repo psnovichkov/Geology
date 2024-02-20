@@ -13,6 +13,16 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        primary: "#bc6c25",
+        secondary:  {
+          100: "#dda15e",
+          200: "#bd7828"
+        }
+      },
+      fontFamily: {
+        body: ['Nunito']
+      }      
     },
   },
   plugins: [],
