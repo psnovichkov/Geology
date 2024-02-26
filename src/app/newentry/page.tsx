@@ -1,3 +1,252 @@
+"use client";
+import { Field, Formik, Form, FormikProps } from "formik";
+import axios from "axios";
+
+interface InitialValues {
+  category: string;
+  sampleId: string;
+  collectorName: string;
+  advisorName: string;
+  collectionYear: number;
+  collectionReason: [];
+  collectionLocation: [];
+  shortDescription: string;
+  longDescription: string;
+  sampleForm: [];
+  sampleType: [];
+  sampleImg: string;
+  storageBuilding: string;
+  storageRoom: string;
+  storageDetails: string;
+  storageDuration: number;
+}
+
 export default function NewEntry() {
-  return <div>New Entry placeholder</div>;
+  return (
+    <div>
+      <div>
+        <h2></h2>
+      </div>
+      <p></p>
+
+      <Formik
+        initialValues={{
+          category: "",
+          sampleId: "",
+          collectorName: "",
+          advisorName: "",
+          collectionYear: 2024,
+          collectionReason: [],
+          collectionLocation: [],
+          shortDescription: "",
+          longDescription: "",
+          sampleForm: [],
+          sampleType: [],
+          sampleImg: "",
+          storageBuilding: "",
+          storageRoom: "",
+          storageDetails: "",
+          storageDuration: 10,
+        }}
+        onSubmit={async (values, actions) => {
+          console.log(values);
+          const result = await axios
+            .post(`http://localhost:5000/samples`, values)
+            .then(() => {
+              actions.setSubmitting(false);
+            });
+        }}
+      >
+        {(props: FormikProps<InitialValues>) => (
+          <Form>
+            <fieldset>
+              <fieldset>
+                <legend>Sample Identification</legend>
+
+                <div>
+                  <label htmlFor="category">
+                    Single Specimen
+                    <Field
+                      type="radio"
+                      name="category"
+                      value="Single Specimen"
+                    />
+                  </label>
+                  <label htmlFor="category">
+                    Collection
+                    <Field type="radio" name="category" value="Collection" />
+                  </label>
+                </div>
+                <hr />
+                <label htmlFor="sampleId">Sample ID</label>
+                <Field
+                  type="text"
+                  name="sampleId"
+                  placeholder="enter sample id..."
+                />
+              </fieldset>
+              <fieldset>
+                <legend>Collector Info</legend>
+                <label htmlFor="collectorName">Collector Name</label>
+                <Field
+                  type="text"
+                  name="collectorName"
+                  placeholder="enter name of collector..."
+                />
+                <label htmlFor="advisorName">Advisor</label>
+                <Field name="advisorName" as="select">
+                  <option value="Dave">Dave</option>
+                  <option value="Ben">Ben</option>
+                  <option value="Other">Other</option>
+                </Field>
+                <label htmlFor="collectionYear">Year Collected</label>
+                <Field
+                  type="text"
+                  name="collectionYear"
+                  placeholder="enter the year this sample was collected"
+                />
+                <div>
+                  <label htmlFor="collectionReason">
+                    Purpose of Sample Collection
+                  </label>
+                  <label htmlFor="collectionReason">
+                    Teaching
+                    <Field
+                      type="checkbox"
+                      name="collectionReason"
+                      value="Teaching"
+                    />
+                  </label>
+                  <label htmlFor="collectionReason">
+                    Research
+                    <Field
+                      type="checkbox"
+                      name="collectionReason"
+                      value="Research"
+                    />
+                  </label>
+                  <label htmlFor="collectionReason">
+                    Other
+                    <Field
+                      type="checkbox"
+                      name="collectionReason"
+                      value="other"
+                    />
+                  </label>
+                </div>
+                <fieldset>
+                  <legend>Sample Collection Location</legend>
+                  <label htmlFor="collectionLocation">
+                    Location Coordinates
+                  </label>
+                  <Field type="text" name="collectionLocation"></Field>
+                </fieldset>
+              </fieldset>
+              <label htmlFor="shortDescription">Short Description</label>
+              <Field
+                type="text"
+                name="shortDescription"
+                placeholder="enter the geologic name of the sample here"
+              />
+              <div>
+                <label htmlFor="sampleForm">Sample Form</label>
+                <label htmlFor="sampleForm">
+                  Hand Sample
+                  <Field type="checkbox" name="sampleForm" value="handSample" />
+                </label>
+                <label htmlFor="sampleForm">
+                  Mineral Separate
+                  <Field
+                    type="checkbox"
+                    name="sampleForm"
+                    value="mineralSeparate"
+                  />
+                </label>
+                <label htmlFor="sampleForm">
+                  Thin Section
+                  <Field
+                    type="checkbox"
+                    name="sampleForm"
+                    value="thinSection"
+                  />
+                </label>
+                Other
+                <label htmlFor="sampleForm">
+                  <Field type="checkbox" name="sampleForm" value="other" />
+                </label>
+              </div>
+              <div>
+                <label htmlFor="sampleType">Sample Type</label>
+                <label htmlFor="sampleType">
+                  Rock
+                  <Field type="checkbox" name="sampleType" value="rock" />
+                </label>
+                <label htmlFor="sampleType">
+                  Mineral
+                  <Field type="checkbox" name="sampleType" value="mineral" />
+                </label>
+                <label htmlFor="sampleType">
+                  Fossil
+                  <Field type="checkbox" name="sampleType" value="fossil" />
+                </label>
+                <label htmlFor="sampleType">
+                  Soil
+                  <Field type="checkbox" name="sampleType" value="soil" />
+                </label>
+                <label htmlFor="sampleType">
+                  Water
+                  <Field type="checkbox" name="sampleType" value="water" />
+                </label>
+                <label htmlFor="sampleType">
+                  Other
+                  <Field type="checkbox" name="sampleType" value="other" />
+                </label>
+              </div>
+              <label htmlFor="sampleImg">Sample Image</label>
+              <Field type="file" name="sampleImg" />
+              <label htmlFor="longDescription">Detailed Description</label>
+              <Field
+                type="textarea"
+                name="longDescription"
+                placeholder="Describe the geologic details here..."
+              />
+              <fieldset>
+                <legend>Storage Details</legend>
+                <label htmlFor="storageBuilding">Storage Building</label>
+                <Field name="storageBuilding" as="select">
+                  <option value="PS">PS</option>
+                  <option value="CH">CH</option>
+                  <option value="Other">Other</option>
+                </Field>
+                <label htmlFor="storageRoom">Storage Room</label>
+                <Field name="storageRoom" as="select">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </Field>
+                <label htmlFor="storageDetails">
+                  Additional Storage Details
+                </label>
+                <Field
+                  type="textarea"
+                  name="storageDetails"
+                  placeholder="enter any additional storage details here"
+                />
+                <label htmlFor="storageDuration">
+                  Storage Duration in years
+                  <Field
+                    type="text"
+                    name="storageDuration"
+                    placeholder="enter number of years this sample should be stored in dataase for."
+                  />
+                </label>
+              </fieldset>
+
+              <button type="submit">SUBMIT</button>
+            </fieldset>
+          </Form>
+        )}
+      </Formik>
+    </div>
+  );
 }

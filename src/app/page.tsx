@@ -10,7 +10,7 @@ export default function Home() {
             <h2 className="card-title">Geo-Science Sample Database</h2>
             <div className="card-body">
               <p className="card-text">
-                Welcome to the Geo-science sample database. This database was
+                Welcome to the geoscience sample database. This database was
                 created to help staff and students find, search, and organize
                 the entire rock collection/inventory here at Idaho State
                 University. To continue, please make a selection from one of the
