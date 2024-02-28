@@ -1,6 +1,14 @@
 "use client";
-import { Field, Formik, Form, FormikProps } from "formik";
+import {
+  Field,
+  Formik,
+  Form,
+  FormikProps,
+  useFormikContext,
+  useField,
+} from "formik";
 import axios from "axios";
+import React from "react";
 
 interface InitialValues {
   category: string;
@@ -9,17 +17,45 @@ interface InitialValues {
   advisorName: string;
   collectionYear: number;
   collectionReason: [];
+  collectionReasonOther: string;
   collectionLocation: [];
   shortDescription: string;
   longDescription: string;
   sampleForm: [];
+  sampleFormOther: string;
   sampleType: [];
+  sampleTypeOther: string;
   sampleImg: string;
   storageBuilding: string;
   storageRoom: string;
   storageDetails: string;
   storageDuration: number;
 }
+
+// const MyField = (props: { name: string }) => {
+//   const {
+//     values: { collectionReason },
+//     touched,
+//     setFieldValue,
+//   } = useFormikContext<InitialValues>();
+//   const [field, meta] = useField(props);
+
+//   React.useEffect(() => {
+//     let hasOther = false;
+//     collectionReason.map((reason) => {
+//       if (reason === "other") {
+//         hasOther = true;
+//       }
+//     });
+//   }, [collectionReason, touched.collectionReason, setFieldValue, props.name]);
+
+//   return (
+//     <>
+//       <input {...props} {...field} />
+//       {!!meta.touched && !!meta.error && <div>{meta.error}</div>}
+//     </>
+//   );
+// };
 
 export default function NewEntry() {
   return (
@@ -37,11 +73,14 @@ export default function NewEntry() {
           advisorName: "",
           collectionYear: 2024,
           collectionReason: [],
+          collectionReasonOther: "",
           collectionLocation: [],
           shortDescription: "",
           longDescription: "",
           sampleForm: [],
+          sampleFormOther: "",
           sampleType: [],
+          sampleTypeOther: "",
           sampleImg: "",
           storageBuilding: "",
           storageRoom: "",
@@ -133,6 +172,15 @@ export default function NewEntry() {
                       value="other"
                     />
                   </label>
+                  {props.values.collectionReason.find(
+                    (reason) => reason == "other"
+                  ) === "other" && (
+                    <Field
+                      className="form-control"
+                      type="text"
+                      name="collectionReasonOther"
+                    />
+                  )}
                 </div>
                 <fieldset>
                   <legend>Sample Collection Location</legend>
@@ -174,6 +222,14 @@ export default function NewEntry() {
                 <label htmlFor="sampleForm">
                   <Field type="checkbox" name="sampleForm" value="other" />
                 </label>
+                {props.values.sampleForm.find((sample) => sample == "other") ===
+                  "other" && (
+                  <Field
+                    className="form-control"
+                    type="text"
+                    name="sampleFormOther"
+                  />
+                )}
               </div>
               <div>
                 <label htmlFor="sampleType">Sample Type</label>
@@ -201,6 +257,14 @@ export default function NewEntry() {
                   Other
                   <Field type="checkbox" name="sampleType" value="other" />
                 </label>
+                {props.values.sampleType.find((type) => type == "other") ===
+                  "other" && (
+                  <Field
+                    className="form-control"
+                    type="text"
+                    name="sampleTypeOther"
+                  />
+                )}
               </div>
               <label htmlFor="sampleImg">Sample Image</label>
               <Field type="file" name="sampleImg" />
