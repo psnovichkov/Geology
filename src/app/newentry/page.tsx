@@ -63,9 +63,14 @@ export default function NewEntry() {
   return (
     <div>
       <div>
-        <h2></h2>
+        <h2 className="text-center mb-6 font-semibold text-2xl">
+          New Sample Form
+        </h2>
       </div>
-      <p></p>
+      <p className="text-center text-sm mb-2">
+        Please fill out the form to the best of your ability. The fields marked
+        with an asterisk (*) are required to be completed.
+      </p>
 
       <Formik
         initialValues={{
@@ -100,217 +105,425 @@ export default function NewEntry() {
       >
         {(props: FormikProps<InitialValues>) => (
           <Form>
-            <fieldset>
-              <fieldset>
-                <legend>Sample Identification</legend>
+            <fieldset className="border border-black p-4">
+              <fieldset className="border border-black p-4">
+                <legend className="float-none w-auto text-xl">
+                  Sample Identification
+                </legend>
+                <div>
+                  <label className="mb-1 block">
+                    Is the sample entry for one or multiple bulk samples? *
+                  </label>
+                </div>
+                <div>
+                  <small className="font-thin text-sm block text-muted">
+                    Please select one from the following.
+                  </small>
+                </div>
 
                 <div>
                   <label htmlFor="category">
-                    Single Specimen
                     <Field
+                      className="mb-2 mr-2"
                       type="radio"
                       name="category"
                       value="Single Specimen"
                     />
+                    Single Specimen
                   </label>
+                </div>
+                <div className="mb-2">
                   <label htmlFor="category">
+                    <Field
+                      className="mb-2 mr-2"
+                      type="radio"
+                      name="category"
+                      value="Collection"
+                    />
                     Collection
-                    <Field type="radio" name="category" value="Collection" />
                   </label>
                 </div>
-                <hr />
-                <label htmlFor="sampleId">Sample ID</label>
-                <Field
-                  type="text"
-                  name="sampleId"
-                  placeholder="enter sample id..."
-                />
-              </fieldset>
-              <fieldset>
-                <legend>Collector Info</legend>
-                <label htmlFor="collectorName">Collector Name</label>
-                <Field
-                  type="text"
-                  name="collectorName"
-                  placeholder="enter name of collector..."
-                />
-                <label htmlFor="advisorName">Advisor</label>
-                <Field name="advisorName" as="select">
-                  <option value="Dave">Dave</option>
-                  <option value="Ben">Ben</option>
-                  <option value="Other">Other</option>
-                </Field>
-                <label htmlFor="collectionYear">Year Collected</label>
-                <Field
-                  type="text"
-                  name="collectionYear"
-                  placeholder="enter the year this sample was collected"
-                />
+
+                {/* <hr className="h-px my-2" /> */}
                 <div>
-                  <label htmlFor="collectionReason">
-                    Purpose of Sample Collection
+                  <label className="block" htmlFor="sampleId">
+                    Sample ID
                   </label>
-                  <label htmlFor="collectionReason">
-                    Teaching
-                    <Field
-                      type="checkbox"
-                      name="collectionReason"
-                      value="Teaching"
-                    />
-                  </label>
-                  <label htmlFor="collectionReason">
-                    Research
-                    <Field
-                      type="checkbox"
-                      name="collectionReason"
-                      value="Research"
-                    />
-                  </label>
-                  <label htmlFor="collectionReason">
-                    Other
-                    <Field
-                      type="checkbox"
-                      name="collectionReason"
-                      value="other"
-                    />
-                  </label>
-                  {props.values.collectionReason.find(
-                    (reason) => reason == "other"
-                  ) === "other" && (
-                    <Field
-                      className="form-control"
-                      type="text"
-                      name="collectionReasonOther"
-                    />
-                  )}
                 </div>
-                <fieldset>
-                  <legend>Sample Collection Location</legend>
-                  <label htmlFor="collectionLocation">
-                    Location Coordinates
+                <div>
+                  <Field
+                    className="inline-input"
+                    type="text"
+                    name="sampleId"
+                    placeholder="enter sample id..."
+                  />
+                </div>
+                <div className="">
+                  <small className="font-thin text-sm block text-muted">
+                    Sample ID may contain letters, numbers, and valid special
+                    characters./,:-#_"
+                  </small>
+                </div>
+              </fieldset>
+              <fieldset className="border border-black p-4">
+                <legend className="float-none w-auto p-2  text-xl">
+                  Collector Info
+                </legend>
+                <div className="mb-3">
+                  <label className="inline-block" htmlFor="collectorName">
+                    Collector Name
                   </label>
-
-                  <MyGoogleMap />
-                  <Field type="text" name="collectionLocation"></Field>
-                </fieldset>
+                  <Field
+                    className="inline-input"
+                    type="text"
+                    name="collectorName"
+                    placeholder="Enter full name here..."
+                  />
+                  <small className="font-thin text-sm block text-muted">
+                    Enter full name as first and last name. ex. John Doe
+                  </small>
+                </div>
+                <div className="mb-3">
+                  <label className="inline-block" htmlFor="advisorName">
+                    Advisor
+                  </label>
+                  <Field
+                    name="advisorName"
+                    as="select"
+                    className="inline-input"
+                  >
+                    <option value="Dave">Dave</option>
+                    <option value="Ben">Ben</option>
+                    <option value="Other">Other</option>
+                  </Field>
+                  <small className="font-thin text-sm block text-muted">
+                    from the dropdown, select an Advisor.
+                  </small>
+                </div>
+                <div className="mb-3">
+                  <label className="inline-block" htmlFor="collectionYear">
+                    Year Collected
+                  </label>
+                  <Field
+                    className="inline-input"
+                    type="text"
+                    name="collectionYear"
+                    placeholder="enter the year this sample was collected"
+                  />
+                  <small className="font-thin text-sm block text-muted">
+                    Enter the year of when this sample was collected.
+                  </small>
+                </div>
+                <div className="mb-3">
+                  <div>
+                    <label className="mb-1 block">
+                      Purpose of Sample Collection
+                    </label>
+                  </div>
+                  <div>
+                    <small className="font-thin text-sm block text-muted">
+                      Select all that apply.
+                    </small>
+                  </div>
+                  <div>
+                    <label
+                      className="inline-block mr-2"
+                      htmlFor="collectionReason"
+                    >
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="collectionReason"
+                        value="Teaching"
+                      />
+                      Teaching
+                    </label>
+                    <label
+                      className="inline-block mr-2"
+                      htmlFor="collectionReason"
+                    >
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="collectionReason"
+                        value="Research"
+                      />
+                      Research
+                    </label>
+                    <label
+                      className="inline-block mr-2"
+                      htmlFor="collectionReason"
+                    >
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="collectionReason"
+                        value="other"
+                      />
+                      Other
+                    </label>
+                    {props.values.collectionReason.find(
+                      (reason) => reason == "other"
+                    ) === "other" && (
+                      <Field
+                        className="inline-input"
+                        type="text"
+                        name="collectionReasonOther"
+                      />
+                    )}
+                  </div>
+                </div>
               </fieldset>
-              <label htmlFor="shortDescription">Short Description</label>
-              <Field
-                type="text"
-                name="shortDescription"
-                placeholder="enter the geologic name of the sample here"
-              />
-              <div>
-                <label htmlFor="sampleForm">Sample Form</label>
-                <label htmlFor="sampleForm">
-                  Hand Sample
-                  <Field type="checkbox" name="sampleForm" value="handSample" />
-                </label>
-                <label htmlFor="sampleForm">
-                  Mineral Separate
+              <fieldset className="border border-black p-4">
+                <legend className="float-none w-auto p-2  text-xl">
+                  Sample Collection Location
+                </legend>
+                <label htmlFor="collectionLocation">Location Coordinates</label>
+                <MyGoogleMap />
+              </fieldset>
+              <fieldset className="border border-black p-4">
+                <legend className="float-none w-auto p-2  text-xl">
+                  Sample Specs
+                </legend>
+                <div className="mb-3">
+                  <label className="inline-block" htmlFor="shortDescription">
+                    Short Description
+                  </label>
                   <Field
-                    type="checkbox"
-                    name="sampleForm"
-                    value="mineralSeparate"
-                  />
-                </label>
-                <label htmlFor="sampleForm">
-                  Thin Section
-                  <Field
-                    type="checkbox"
-                    name="sampleForm"
-                    value="thinSection"
-                  />
-                </label>
-                Other
-                <label htmlFor="sampleForm">
-                  <Field type="checkbox" name="sampleForm" value="other" />
-                </label>
-                {props.values.sampleForm.find((sample) => sample == "other") ===
-                  "other" && (
-                  <Field
-                    className="form-control"
+                    className="inline-input"
                     type="text"
-                    name="sampleFormOther"
+                    name="shortDescription"
+                    placeholder="Enter geologic name of sample here.."
                   />
-                )}
-              </div>
-              <div>
-                <label htmlFor="sampleType">Sample Type</label>
-                <label htmlFor="sampleType">
-                  Rock
-                  <Field type="checkbox" name="sampleType" value="rock" />
-                </label>
-                <label htmlFor="sampleType">
-                  Mineral
-                  <Field type="checkbox" name="sampleType" value="mineral" />
-                </label>
-                <label htmlFor="sampleType">
-                  Fossil
-                  <Field type="checkbox" name="sampleType" value="fossil" />
-                </label>
-                <label htmlFor="sampleType">
-                  Soil
-                  <Field type="checkbox" name="sampleType" value="soil" />
-                </label>
-                <label htmlFor="sampleType">
-                  Water
-                  <Field type="checkbox" name="sampleType" value="water" />
-                </label>
-                <label htmlFor="sampleType">
-                  Other
-                  <Field type="checkbox" name="sampleType" value="other" />
-                </label>
-                {props.values.sampleType.find((type) => type == "other") ===
-                  "other" && (
+                  <small className="font-thin text-sm block text-muted">
+                    Enter a specific geologic name or a reference to the sample.
+                    ex. quartz.
+                  </small>
+                </div>
+
+                <div className="mb-3">
+                  <div>
+                    <label className="mb-1 block">Sample Form</label>
+                  </div>
+                  <div>
+                    <small className="font-thin text-sm block text-muted">
+                      Select all that apply.
+                    </small>
+                  </div>
+                  <div>
+                    <label className="inline-block mr-2" htmlFor="sampleForm">
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="sampleForm"
+                        value="handSample"
+                      />
+                      Hand Sample
+                    </label>
+                    <label className="inline-block mr-2" htmlFor="sampleForm">
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="sampleForm"
+                        value="mineralSeparate"
+                      />
+                      Mineral Separate
+                    </label>
+                    <label className="inline-block mr-2" htmlFor="sampleForm">
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="sampleForm"
+                        value="thinSection"
+                      />
+                      Thin Section
+                    </label>
+                    <label className="inline-block mr-2" htmlFor="sampleForm">
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="sampleForm"
+                        value="other"
+                      />
+                      Other
+                    </label>
+                    {props.values.sampleForm.find(
+                      (reason) => reason == "other"
+                    ) === "other" && (
+                      <Field
+                        className="inline-input"
+                        type="text"
+                        name="sampleFormOther"
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <div className="mb-3">
+                  <div>
+                    <label className="mb-1 block">Sample Type</label>
+                  </div>
+                  <div>
+                    <small className="font-thin text-sm block text-muted">
+                      Select all that apply.
+                    </small>
+                  </div>
+                  <div>
+                    <label className="inline-block mr-2" htmlFor="sampleType">
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="sampleType"
+                        value="rock"
+                      />
+                      Rock
+                    </label>
+                    <label className="inline-block mr-2" htmlFor="sampleForm">
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="sampleType"
+                        value="mineral"
+                      />
+                      Mineral
+                    </label>
+                    <label className="inline-block mr-2" htmlFor="sampleForm">
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="sampleType"
+                        value="fossil"
+                      />
+                      Fossil
+                    </label>
+                    <label className="inline-block mr-2" htmlFor="sampleForm">
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="sampleType"
+                        value="soil"
+                      />
+                      Soil
+                    </label>
+                    <label className="inline-block mr-2" htmlFor="sampleForm">
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="sampleType"
+                        value="water"
+                      />
+                      Water
+                    </label>
+                    <label className="inline-block mr-2" htmlFor="sampleForm">
+                      <Field
+                        className="mb-2 mr-2"
+                        type="checkbox"
+                        name="sampleType"
+                        value="other"
+                      />
+                      Other
+                    </label>
+                    {props.values.sampleType.find(
+                      (reason) => reason == "other"
+                    ) === "other" && (
+                      <Field
+                        className="inline-input"
+                        type="text"
+                        name="sampleTypeOther"
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="sampleImg">Sample Image</label>
+                  <Field type="file" name="sampleImg" />
+                </div>
+                <div className="mb-3">
+                  <label className="inline-block" htmlFor="longDescription">
+                    Detailed Description
+                  </label>
                   <Field
-                    className="form-control"
-                    type="text"
-                    name="sampleTypeOther"
+                    className="inline-input"
+                    type="textarea"
+                    name="longDescription"
+                    placeholder="Describe the geologic details here..."
                   />
-                )}
-              </div>
-              <label htmlFor="sampleImg">Sample Image</label>
-              <Field type="file" name="sampleImg" />
-              <label htmlFor="longDescription">Detailed Description</label>
-              <Field
-                type="textarea"
-                name="longDescription"
-                placeholder="Describe the geologic details here..."
-              />
-              <fieldset>
-                <legend>Storage Details</legend>
-                <label htmlFor="storageBuilding">Storage Building</label>
-                <Field name="storageBuilding" as="select">
-                  <option value="PS">PS</option>
-                  <option value="CH">CH</option>
-                  <option value="Other">Other</option>
-                </Field>
-                <label htmlFor="storageRoom">Storage Room</label>
-                <Field name="storageRoom" as="select">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </Field>
-                <label htmlFor="storageDetails">
-                  Additional Storage Details
-                </label>
-                <Field
-                  type="textarea"
-                  name="storageDetails"
-                  placeholder="enter any additional storage details here"
-                />
-                <label htmlFor="storageDuration">
-                  Storage Duration in years
+                </div>
+              </fieldset>
+
+              <fieldset className="border border-black p-4">
+                <legend className="float-none w-auto p-2  text-xl">
+                  Storage Details
+                </legend>
+                <div className="mb-3">
+                  <label className="inline-block" htmlFor="storageBuilding">
+                    Storage Building
+                  </label>
                   <Field
-                    type="text"
+                    name="storageBuilding"
+                    as="select"
+                    className="inline-input"
+                  >
+                    <option value="PS">PS (Physical Science)</option>
+                    <option value="CH">CH (Colonial Hall)</option>
+                    <option value="Other">Other</option>
+                  </Field>
+                  <small className="font-thin text-sm block text-muted">
+                    from the dropdown, select which building this sample will be
+                    stored in.
+                  </small>
+                </div>
+                <div className="mb-3">
+                  <label className="inline-block" htmlFor="storageRoom">
+                    Storage Room
+                  </label>
+                  <Field
+                    name="storageRoom"
+                    as="select"
+                    className="inline-input"
+                  >
+                    <option value="1">Room #1</option>
+                    <option value="2">Room #2</option>
+                    <option value="3">Room #3</option>
+                  </Field>
+                  <small className="font-thin text-sm block text-muted">
+                    from the dropdown, select which room this sample will be
+                    stored in.
+                  </small>
+                </div>
+
+                <div className="mb-3">
+                  <label className="inline-block" htmlFor="storageDetails">
+                    Additional Storage Details
+                  </label>
+                  <Field
+                    className="inline-input"
+                    type="textarea"
+                    name="storageDetails"
+                    placeholder="Enter any additional storage details here"
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label className="inline-block" htmlFor="storageDuration">
+                    Storage Duration in years
+                  </label>
+                  <Field
+                    className="inline-input"
+                    type="textarea"
                     name="storageDuration"
-                    placeholder="enter number of years this sample should be stored in dataase for."
+                    placeholder="Enter number of years this sample should be stored in dataase for."
                   />
-                </label>
+                </div>
               </fieldset>
-
-              <button type="submit">SUBMIT</button>
+              <div className="text-center mt-2">
+                <button
+                  type="submit"
+                  className="bg-secondary-100 hover:bg-secondary-200 text-white font-bold py-2 px-4 rounded"
+                >
+                  SUBMIT
+                </button>
+              </div>
             </fieldset>
           </Form>
         )}
