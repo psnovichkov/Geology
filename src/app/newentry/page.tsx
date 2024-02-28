@@ -9,6 +9,8 @@ import {
 } from "formik";
 import axios from "axios";
 import React from "react";
+import Map from "@/components/map/map.component";
+import MyGoogleMap from "@/components/googleMap/googleMap.component";
 
 interface InitialValues {
   category: string;
@@ -187,6 +189,8 @@ export default function NewEntry() {
                   <label htmlFor="collectionLocation">
                     Location Coordinates
                   </label>
+
+                  <MyGoogleMap />
                   <Field type="text" name="collectionLocation"></Field>
                 </fieldset>
               </fieldset>
