@@ -96,6 +96,7 @@ export default function NewEntry() {
         }}
         onSubmit={async (values, actions) => {
           console.log(values);
+          actions.setSubmitting(true);
           const result = await axios
             .post(`http://localhost:5000/samples`, values)
             .then(() => {
