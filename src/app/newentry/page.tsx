@@ -11,28 +11,29 @@ import axios from "axios";
 import React from "react";
 import Map from "@/components/map/map.component";
 import MyGoogleMap from "@/components/googleMap/googleMap.component";
+import { API, Sample } from "@/services/api";
 
-interface InitialValues {
-  category: string;
-  sampleId: string;
-  collectorName: string;
-  advisorName: string;
-  collectionYear: number;
-  collectionReason: [];
-  collectionReasonOther: string;
-  collectionLocation: [];
-  shortDescription: string;
-  longDescription: string;
-  sampleForm: [];
-  sampleFormOther: string;
-  sampleType: [];
-  sampleTypeOther: string;
-  sampleImg: string;
-  storageBuilding: string;
-  storageRoom: string;
-  storageDetails: string;
-  storageDuration: number;
-}
+// interface InitialValues {
+//   category: string;
+//   sampleId: string;
+//   collectorName: string;
+//   advisorName: string;
+//   collectionYear: number;
+//   collectionReason: [];
+//   collectionReasonOther: string;
+//   collectionLocation: [];
+//   shortDescription: string;
+//   longDescription: string;
+//   sampleForm: [];
+//   sampleFormOther: string;
+//   sampleType: [];
+//   sampleTypeOther: string;
+//   sampleImg: string;
+//   storageBuilding: string;
+//   storageRoom: string;
+//   storageDetails: string;
+//   storageDuration: number;
+// }
 
 // const MyField = (props: { name: string }) => {
 //   const {
@@ -97,14 +98,19 @@ export default function NewEntry() {
         onSubmit={async (values, actions) => {
           console.log(values);
           actions.setSubmitting(true);
-          const result = await axios
-            .post(`http://localhost:5000/samples`, values)
-            .then(() => {
-              actions.setSubmitting(false);
-            });
+          API.addSample(values)
+          .then(() => {
+                actions.setSubmitting(false);
+          })
+        
+          // const result = await axios
+          //   .post(`http://localhost:5000/samples`, values)
+          //   .then(() => {
+          //     actions.setSubmitting(false);
+          //   });
         }}
       >
-        {(props: FormikProps<InitialValues>) => (
+        {(props: FormikProps<Sample>) => (
           <Form>
             <fieldset className="border border-black p-4">
               <fieldset className="border border-black p-4">
