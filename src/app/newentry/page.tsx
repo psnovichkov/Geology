@@ -98,11 +98,10 @@ export default function NewEntry() {
         onSubmit={async (values, actions) => {
           console.log(values);
           actions.setSubmitting(true);
-          API.addSample(values)
-          .then(() => {
-                actions.setSubmitting(false);
-          })
-        
+          API.addSample(values).then(() => {
+            actions.setSubmitting(false);
+          });
+
           // const result = await axios
           //   .post(`http://localhost:5000/samples`, values)
           //   .then(() => {
@@ -134,7 +133,7 @@ export default function NewEntry() {
                       className="mb-2 mr-2"
                       type="radio"
                       name="category"
-                      value="Single Specimen"
+                      value="singleSpecimen"
                     />
                     Single Specimen
                   </label>
@@ -168,7 +167,7 @@ export default function NewEntry() {
                 <div className="">
                   <small className="font-thin text-sm block text-muted">
                     Sample ID may contain letters, numbers, and valid special
-                    characters./,:-#_"
+                    characters./,:-#_
                   </small>
                 </div>
               </fieldset>
@@ -241,7 +240,7 @@ export default function NewEntry() {
                         className="mb-2 mr-2"
                         type="checkbox"
                         name="collectionReason"
-                        value="Teaching"
+                        value="teaching"
                       />
                       Teaching
                     </label>
@@ -253,7 +252,7 @@ export default function NewEntry() {
                         className="mb-2 mr-2"
                         type="checkbox"
                         name="collectionReason"
-                        value="Research"
+                        value="research"
                       />
                       Research
                     </label>
@@ -269,15 +268,16 @@ export default function NewEntry() {
                       />
                       Other
                     </label>
-                    {props.values.collectionReason.find(
-                      (reason) => reason == "other"
-                    ) === "other" && (
-                      <Field
-                        className="inline-input"
-                        type="text"
-                        name="collectionReasonOther"
-                      />
-                    )}
+                    {props.values.collectionReason &&
+                      props.values.collectionReason.find(
+                        (reason) => reason == "other"
+                      ) === "other" && (
+                        <Field
+                          className="inline-input"
+                          type="text"
+                          name="collectionReasonOther"
+                        />
+                      )}
                   </div>
                 </div>
               </fieldset>
@@ -354,15 +354,16 @@ export default function NewEntry() {
                       />
                       Other
                     </label>
-                    {props.values.sampleForm.find(
-                      (reason) => reason == "other"
-                    ) === "other" && (
-                      <Field
-                        className="inline-input"
-                        type="text"
-                        name="sampleFormOther"
-                      />
-                    )}
+                    {props.values.sampleForm &&
+                      props.values.sampleForm.find(
+                        (reason) => reason == "other"
+                      ) === "other" && (
+                        <Field
+                          className="inline-input"
+                          type="text"
+                          name="sampleFormOther"
+                        />
+                      )}
                   </div>
                 </div>
 
@@ -430,15 +431,16 @@ export default function NewEntry() {
                       />
                       Other
                     </label>
-                    {props.values.sampleType.find(
-                      (reason) => reason == "other"
-                    ) === "other" && (
-                      <Field
-                        className="inline-input"
-                        type="text"
-                        name="sampleTypeOther"
-                      />
-                    )}
+                    {props.values.sampleType &&
+                      props.values.sampleType.find(
+                        (reason) => reason == "other"
+                      ) === "other" && (
+                        <Field
+                          className="inline-input"
+                          type="text"
+                          name="sampleTypeOther"
+                        />
+                      )}
                   </div>
                 </div>
                 <div className="mb-3">
@@ -517,7 +519,7 @@ export default function NewEntry() {
                   </label>
                   <Field
                     className="inline-input"
-                    type="textarea"
+                    type="text"
                     name="storageDuration"
                     placeholder="Enter number of years this sample should be stored in dataase for."
                   />
