@@ -1,3 +1,84 @@
+# isu-geoscience-inventory-client
+
+Tailored for the Geoscience Department at Idaho State University, my web application offers an efficient inventory management solution adept at handling existing and preexisting samples. Utilizing the Next.js framework, React libraries, TypeScript, and Tailwind CSS, my tool provides a straightforward and user-friendly interface. Additionally, my application leverages the power of the Google Maps API to enhance location-based data visualization and analysis. From effortless sample data entry to streamlined database searches, this tool empowers the department with efficient sample management for research, teaching, and administrative needs.
+
+### Usage
+
+###### Welcome page
+
+![TWelcome Page](./public/welcome-page.png)
+
+###### New Entry Form page
+
+![New Entry Form Page](./public/new-entry-page.png)
+
+\*TODO: need to include either screenshots or a quick video walk through of all the functionalities
+
+## Developer Instructions
+
+### Dependencies
+
+##### Prerequisites
+
+- Node (v20.11.0 or higher)
+
+##### Required
+
+- React v18 or higher
+
+```bash
+npm install react react-dom
+```
+
+- Nextjs v14.1.0 or higher
+
+```bash
+npm install next
+```
+
+- Formik v2.4.5
+
+```bash
+npm install formik
+```
+
+- Axios v1.6.7 or higher
+
+```bash
+npm install axios
+```
+
+- @react-google-maps/api v2.19.3 or higher
+
+```bash
+npm install @react-google-maps/api
+```
+
+### Run
+
+1. Navigate to the projects root directory
+
+```bash
+cd PATH_TO_PROJECT/isu-geoscience-inventory-client
+```
+
+2. Run the following command
+
+```bash
+npm run dev
+```
+
+### Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+---
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

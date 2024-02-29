@@ -167,7 +167,7 @@ export default function NewEntry() {
                 <div className="">
                   <small className="font-thin text-sm block text-muted">
                     Sample ID may contain letters, numbers, and valid special
-                    characters./,:-#_"
+                    characters./,:-#_
                   </small>
                 </div>
               </fieldset>
