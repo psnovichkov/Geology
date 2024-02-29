@@ -1,9 +1,11 @@
+import LoginButton from "@/components/loginButton/page";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-8 sm:p-16">
+      <LoginButton />
       <div className="grid md:grid-cols-6 md:gap-4">
         <div className="col-start-0 col-span-12 md:col-start-1 md:col-span-6 lg:col-start-2 lg:col-span-4">
           <div className="card hover:shadow-lg">
