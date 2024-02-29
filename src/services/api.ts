@@ -9,14 +9,14 @@ export interface Sample {
     collectorName: string;
     advisorName?: string;
     collectionYear?: number;
-    collectionReason?: [];
+    collectionReason?: string[];
     collectionReasonOther?: string;
-    collectionLocation?: [];
+    collectionLocation?: string[];
     shortDescription?: string;
     longDescription?: string;
-    sampleForm?: [];
+    sampleForm?: string[];
     sampleFormOther?: string;
-    sampleType?: [];
+    sampleType?: string[];
     sampleTypeOther?: string;
     sampleImg?: string;
     storageBuilding?: string;
