@@ -15,14 +15,14 @@ const config: Config = {
       },
       colors: {
         primary: "#bc6c25",
-        secondary:  {
+        secondary: {
           100: "#dda15e",
-          200: "#bd7828"
-        }
+          200: "#bd7828",
+        },
       },
       fontFamily: {
-        body: ['Nunito']
-      }      
+        body: ["Nunito"],
+      },
     },
   },
   plugins: [],

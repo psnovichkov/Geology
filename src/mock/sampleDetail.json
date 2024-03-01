@@ -18,5 +18,8 @@
   "storageBuilding": "PS",
   "storageRoom": "1",
   "storageDetails": "Secret room nobody should go to",
-  "storageDuration": 3
+  "storageDuration": 3,
+  "locationRectangleBounds": null,
+  "locationMarkerlat": null,
+  "locationMarkerlng": null
 }
