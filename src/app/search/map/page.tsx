@@ -24,12 +24,12 @@ export default function SearchMap() {
         onSubmit={async (values, actions) => {
           console.log("=============== form values", values);
           actions.setSubmitting(true);
-          // API.addSample(values).then(() => {
-          //   actions.setSubmitting(false);
-          // });
-          setTimeout(() => {
+          API.searchByLocation(values).then(() => {
             actions.setSubmitting(false);
-          }, 100);
+          });
+          // setTimeout(() => {
+          //   actions.setSubmitting(false);
+          // }, 100);
         }}
       >
         {(props: FormikProps<SearchLocationParams>) => (
