@@ -5,6 +5,8 @@ import {
   DrawingManager,
   useJsApiLoader,
   Libraries,
+  Marker,
+  Rectangle,
 } from "@react-google-maps/api";
 import React, { useState, memo, useCallback } from "react";
 import { useFormikContext } from "formik";
@@ -116,6 +118,22 @@ export default memo(function MyGoogleMap(): JSX.Element {
         onUnmount={onUnmount}
       >
         {/* Child components, such as markers, info windows, etc. */}
+        <Marker
+          key={123}
+          position={{
+            lat: 42.880363,
+            lng: -112.452911,
+          }}
+        />
+        <Rectangle
+        // bounds= {
+        //   zh
+        //   north: 33.685,
+        //   south: 33.671,
+        //   east: -116.224,
+        //   west: -116.251
+        // }
+        />
         <DrawingManager
           drawingMode={google.maps.drawing?.OverlayType.RECTANGLE}
           onRectangleComplete={handleOnRectangleComplete}
