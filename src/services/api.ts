@@ -51,7 +51,7 @@ export interface SearchLocationParams {
 export class API {
   // public static readonly API_URL = 'http://127.0.0.1:5000';
   public static readonly API_URL =
-    "https://x9hjtrdwd3.execute-api.us-east-1.amazonaws.com/prod";
+    "https://3d9e678b12.execute-api.us-east-1.amazonaws.com/prod";
   public static readonly API_KEY = "<YOUR_GoogleAPIKey_HERE>";
 
   private static fetchGetData<S>(path: string): Promise<S> {
