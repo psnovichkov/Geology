@@ -25,7 +25,7 @@ export default function samplecard(sample: Sample) {
   // }
   return (
     <Link
-      href={`/search/sampleDetail/${sample.sampleId}`}
+      href={`/search/sampleDetail/${sample.id}`}
       className="cursor-pointer "
     >
       <div className="bg-white border border-gray-200 rounded-lg shadow  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
