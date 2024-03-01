@@ -21,8 +21,10 @@ export interface Sample {
   storageDetails?: string;
   storageDuration?: number;
   locationRectangleBounds?: {
-    Zh: { lo: number | null; hi: number | null };
-    Jh: { lo: number | null; hi: number | null };
+    south: number,
+    west: number,
+    north: number,
+    east: number
   } | null;
   locationMarkerlat?: number | null;
   locationMarkerlng?: number | null;
@@ -41,10 +43,12 @@ export interface SearchFilterParams {
 }
 
 export interface SearchLocationParams {
-  xmin: number;
-  ymin: number;
-  xmax: number;
-  ymax: number;
+  locationRectangleBounds?: {
+    south: number,
+    west: number,
+    north: number,
+    east: number
+  } | null;
 }
 
 //create class for API
@@ -124,6 +128,8 @@ export class API {
 
   //add sample using POST
   public static addSample(sample: Sample): Promise<Sample> {
+    console.log("POST addSample: ", sample);
+    console.log("POST addSample as JSON: ", JSON.stringify(sample));
     return this.fetchData<Sample, Sample>("/samples", "POST", sample);
   }
 
