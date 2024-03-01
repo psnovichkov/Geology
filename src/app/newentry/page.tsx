@@ -5,11 +5,6 @@ import MyGoogleMap from "@/components/googleMap/googleMap.component";
 import { API, Sample } from "@/services/api";
 
 export default function NewEntry() {
-  const handleOnMarketSet = (lat: number, lng: number) => {
-    console.log("############ latitude", lat);
-    console.log("############ longitude", lng);
-  };
-
   return (
     <div>
       <div>
@@ -45,11 +40,14 @@ export default function NewEntry() {
           storageDuration: 10,
         }}
         onSubmit={async (values, actions) => {
-          console.log(values);
+          console.log("=============== form values", values);
           actions.setSubmitting(true);
-          API.addSample(values).then(() => {
+          // API.addSample(values).then(() => {
+          //   actions.setSubmitting(false);
+          // });
+          setTimeout(() => {
             actions.setSubmitting(false);
-          });
+          }, 100);
         }}
       >
         {(props: FormikProps<Sample>) => (
@@ -229,7 +227,7 @@ export default function NewEntry() {
                   Sample Collection Location
                 </legend>
 
-                <MyGoogleMap onMarkerSet={handleOnMarketSet} />
+                <MyGoogleMap />
               </fieldset>
               <fieldset className="border border-black p-4">
                 <legend className="float-none w-auto p-2  text-xl">

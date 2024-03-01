@@ -7,6 +7,7 @@ import {
   Libraries,
 } from "@react-google-maps/api";
 import React, { useState, memo, useCallback } from "react";
+import { useFormikContext } from "formik";
 
 const containerStyle = {
   width: "700px",
@@ -22,11 +23,9 @@ const googleApiKey: string = process.env.NEXT_PUBLIC_GOOGLE_API_KEY
   ? process.env.NEXT_PUBLIC_GOOGLE_API_KEY
   : "";
 
-interface GoogleMapProps {
-  onMarkerSet: (lon: number, lat: number) => void;
-}
+export default memo(function MyGoogleMap(): JSX.Element {
+  const { values, setFieldValue } = useFormikContext();
 
-export default memo(function MyGoogleMap(props: GoogleMapProps): JSX.Element {
   const [libraries] = useState<Libraries>(["drawing"]);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -60,13 +59,21 @@ export default memo(function MyGoogleMap(props: GoogleMapProps): JSX.Element {
 
   const handleOnRectangleComplete = (rectangle: google.maps.Rectangle) => {
     console.log("##################", rectangle.getBounds());
+    setFieldValue("locationMarkerlat", null);
+    setFieldValue("locationMarkerlng", null);
+    setFieldValue("locationRectangleBounds", rectangle.getBounds());
   };
 
   const handleOnMarkerComplete = (marker: google.maps.Marker) => {
     let lat = marker.getPosition()?.lat();
     let lng = marker.getPosition()?.lng();
+
     if (lat && lng) {
-      props.onMarkerSet(lat, lng);
+      setFieldValue("locationMarkerlat", lat);
+      setFieldValue("locationMarkerlng", lng);
+      setFieldValue("locationRectangleBounds", null);
+      // console.log("formik values", values);
+      // props.onMarkerSet(lat, lng);
     }
   };
 
@@ -78,6 +85,9 @@ export default memo(function MyGoogleMap(props: GoogleMapProps): JSX.Element {
   };
 
   const deleteOverlay = () => {
+    setFieldValue("locationMarkerlat", null);
+    setFieldValue("locationMarkerlng", null);
+    setFieldValue("locationRectangleBounds", null);
     if (overlay) overlay.overlay?.setMap(null);
   };
 
