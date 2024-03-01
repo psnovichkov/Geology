@@ -94,7 +94,7 @@ export class API {
   // search by SearchFilterParams and return Sample[]
   public static searchByFilter(params: SearchFilterParams): Promise<Sample[]> {
     return this.fetchData<SearchFilterParams, Sample[]>(
-      "/search",
+      "/samples/search/filters",
       "POST",
       params
     );
@@ -105,7 +105,7 @@ export class API {
     params: SearchLocationParams
   ): Promise<Sample[]> {
     return this.fetchData<SearchLocationParams, Sample[]>(
-      "/search",
+      "/samples/search/location",
       "POST",
       params
     );
@@ -113,7 +113,7 @@ export class API {
 
   // search by full text and return Sample[]
   public static searchByText(text: string): Promise<Sample[]> {
-    return this.fetchData<string, Sample[]>("/search", "POST", text);
+    return this.fetchData<string, Sample[]>("/samples/search/fulltext", "POST", text);
   }
 
   // get sample by id and return Sample
