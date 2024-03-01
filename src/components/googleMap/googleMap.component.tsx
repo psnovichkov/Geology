@@ -5,8 +5,6 @@ import {
   DrawingManager,
   useJsApiLoader,
   Libraries,
-  Marker,
-  Rectangle,
 } from "@react-google-maps/api";
 import React, { useState, memo, useCallback } from "react";
 import { useFormikContext } from "formik";
@@ -25,8 +23,14 @@ const googleApiKey: string = process.env.NEXT_PUBLIC_GOOGLE_API_KEY
   ? process.env.NEXT_PUBLIC_GOOGLE_API_KEY
   : "";
 
-export default memo(function MyGoogleMap(): JSX.Element {
-  const { values, setFieldValue } = useFormikContext();
+type GoogleMapProps = {
+  mode: "search" | "create" | "show";
+  showDrawingControls?: boolean;
+  drawingModes?: google.maps.drawing.OverlayType[];
+};
+
+export default memo(function MyGoogleMap(props: GoogleMapProps): JSX.Element {
+  const { setFieldValue } = useFormikContext();
 
   const [libraries] = useState<Libraries>(["drawing"]);
   const { isLoaded } = useJsApiLoader({
@@ -117,8 +121,7 @@ export default memo(function MyGoogleMap(): JSX.Element {
         onLoad={onMapLoad}
         onUnmount={onUnmount}
       >
-        {/* Child components, such as markers, info windows, etc. */}
-        <Marker
+        {/* <Marker
           key={123}
           position={{
             lat: 42.880363,
@@ -126,14 +129,13 @@ export default memo(function MyGoogleMap(): JSX.Element {
           }}
         />
         <Rectangle
-        // bounds= {
-        //   zh
-        //   north: 33.685,
-        //   south: 33.671,
-        //   east: -116.224,
-        //   west: -116.251
-        // }
-        />
+          bounds={{
+            south: 42.84462847867871,
+            west: -112.47006640885925,
+            north: 43.02158822992076,
+            east: -112.1761821315155,
+          }}
+        /> */}
         <DrawingManager
           drawingMode={google.maps.drawing?.OverlayType.RECTANGLE}
           onRectangleComplete={handleOnRectangleComplete}

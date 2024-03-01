@@ -227,7 +227,7 @@ export default function NewEntry() {
                   Sample Collection Location
                 </legend>
 
-                <MyGoogleMap />
+                <MyGoogleMap mode="search" showDrawingControls={true} />
               </fieldset>
               <fieldset className="border border-black p-4">
                 <legend className="float-none w-auto p-2  text-xl">

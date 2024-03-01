@@ -25,8 +25,6 @@ export interface Sample {
     west: number,
     north: number,
     east: number
-    // Zh: { lo: number | null; hi: number | null };
-    // Jh: { lo: number | null; hi: number | null };
   } | null;
   locationMarkerlat?: number | null;
   locationMarkerlng?: number | null;
@@ -45,10 +43,12 @@ export interface SearchFilterParams {
 }
 
 export interface SearchLocationParams {
-  xmin: number;
-  ymin: number;
-  xmax: number;
-  ymax: number;
+  locationRectangleBounds?: {
+    south: number,
+    west: number,
+    north: number,
+    east: number
+  } | null;
 }
 
 //create class for API
