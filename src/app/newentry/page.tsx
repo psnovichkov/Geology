@@ -1,64 +1,8 @@
 "use client";
-import {
-  Field,
-  Formik,
-  Form,
-  FormikProps,
-  useFormikContext,
-  useField,
-} from "formik";
-import axios from "axios";
+import { Field, Formik, Form, FormikProps } from "formik";
 import React from "react";
-import Map from "@/components/map/map.component";
 import MyGoogleMap from "@/components/googleMap/googleMap.component";
 import { API, Sample } from "@/services/api";
-
-// interface InitialValues {
-//   category: string;
-//   sampleId: string;
-//   collectorName: string;
-//   advisorName: string;
-//   collectionYear: number;
-//   collectionReason: [];
-//   collectionReasonOther: string;
-//   collectionLocation: [];
-//   shortDescription: string;
-//   longDescription: string;
-//   sampleForm: [];
-//   sampleFormOther: string;
-//   sampleType: [];
-//   sampleTypeOther: string;
-//   sampleImg: string;
-//   storageBuilding: string;
-//   storageRoom: string;
-//   storageDetails: string;
-//   storageDuration: number;
-// }
-
-// const MyField = (props: { name: string }) => {
-//   const {
-//     values: { collectionReason },
-//     touched,
-//     setFieldValue,
-//   } = useFormikContext<InitialValues>();
-//   const [field, meta] = useField(props);
-
-//   React.useEffect(() => {
-//     let hasOther = false;
-//     collectionReason.map((reason) => {
-//       if (reason === "other") {
-//         hasOther = true;
-//       }
-//     });
-//   }, [collectionReason, touched.collectionReason, setFieldValue, props.name]);
-
-//   return (
-//     <>
-//       <input {...props} {...field} />
-//       {!!meta.touched && !!meta.error && <div>{meta.error}</div>}
-//     </>
-//   );
-// };
 
 export default function NewEntry() {
   return (
@@ -96,17 +40,14 @@ export default function NewEntry() {
           storageDuration: 10,
         }}
         onSubmit={async (values, actions) => {
-          console.log(values);
+          console.log("=============== form values", values);
           actions.setSubmitting(true);
-          API.addSample(values).then(() => {
+          // API.addSample(values).then(() => {
+          //   actions.setSubmitting(false);
+          // });
+          setTimeout(() => {
             actions.setSubmitting(false);
-          });
-
-          // const result = await axios
-          //   .post(`http://localhost:5000/samples`, values)
-          //   .then(() => {
-          //     actions.setSubmitting(false);
-          //   });
+          }, 100);
         }}
       >
         {(props: FormikProps<Sample>) => (
@@ -203,7 +144,7 @@ export default function NewEntry() {
                     <option value="Other">Other</option>
                   </Field>
                   <small className="font-thin text-sm block text-muted">
-                    from the dropdown, select an Advisor.
+                    From the dropdown, select an Advisor.
                   </small>
                 </div>
                 <div className="mb-3">
@@ -285,7 +226,7 @@ export default function NewEntry() {
                 <legend className="float-none w-auto p-2  text-xl">
                   Sample Collection Location
                 </legend>
-                <label htmlFor="collectionLocation">Location Coordinates</label>
+
                 <MyGoogleMap />
               </fieldset>
               <fieldset className="border border-black p-4">
@@ -478,7 +419,7 @@ export default function NewEntry() {
                     <option value="Other">Other</option>
                   </Field>
                   <small className="font-thin text-sm block text-muted">
-                    from the dropdown, select which building this sample will be
+                    From the dropdown, select which building this sample will be
                     stored in.
                   </small>
                 </div>
@@ -496,7 +437,7 @@ export default function NewEntry() {
                     <option value="3">Room #3</option>
                   </Field>
                   <small className="font-thin text-sm block text-muted">
-                    from the dropdown, select which room this sample will be
+                    From the dropdown, select which room this sample will be
                     stored in.
                   </small>
                 </div>
