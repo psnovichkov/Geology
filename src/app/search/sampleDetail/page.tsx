@@ -2,6 +2,7 @@
 import { Sample } from "@/services/api";
 import { useEffect, useState } from "react";
 import sampleDetail from "../../../mock/sampleDetail.json";
+import Image from "next/image";
 
 export default function SampleDetail() {
   const [sample, setSample] = useState<Sample>();
@@ -21,17 +22,29 @@ export default function SampleDetail() {
           <div className="col-start-0 col-span-12 md:col-start-1 md:col-span-6 lg:col-start-2 lg:col-span-4">
             <div className="card hover:shadow-lg">
               <div className="card-body">
-                <div>
-                  <div className="px-4 sm:px-0">
+                <div className="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <div className="justify-self-center">
+                    <div className="h-36">
+                      <Image
+                        className="object-cover w-full "
+                        src="/sample_image.jpg"
+                        alt=""
+                        width={72}
+                        height={72}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-2">
                     <h3 className="text-base font-semibold leading-7 text-gray-900">
-                      Sample ID
                       {sample.sampleId}
                     </h3>
                     <span className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-                      category
-                      {/* {sample.category} */}
+                      {sample.category}
                     </span>
                   </div>
+                </div>
+                <div className="">
+                  <div className="px-4 sm:px-0"></div>
                   <div className="mt-6 border-t border-gray-300">
                     <dl className="divide-y divide-gray-200">
                       <div className="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -44,7 +57,7 @@ export default function SampleDetail() {
                               Collector Name
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              collectorname
+                              {sample.collectorName}
                             </div>
                           </div>
 
@@ -53,7 +66,7 @@ export default function SampleDetail() {
                               Advisor Name
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              Ben
+                              {sample.advisorName}
                             </div>
                           </div>
 
@@ -62,15 +75,18 @@ export default function SampleDetail() {
                               Collection Year
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              XXXX
+                              {sample.collectionYear}
                             </div>
                           </div>
                           <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <div className="text-sm font-medium leading-6 text-gray-900">
                               Collection Site Coordinates
+                              {sample.locationRectangleBounds
+                                ? "rectangle"
+                                : ""}
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              XXXX
+                              {/** figure out how to display the coordinates based on the type of coordinates */}
                             </div>
                           </div>
                         </div>
@@ -85,7 +101,7 @@ export default function SampleDetail() {
                               Short Description
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              description
+                              {sample.shortDescription}
                             </div>
                           </div>
 
@@ -103,7 +119,7 @@ export default function SampleDetail() {
                               Form(s)
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              hand sample
+                              {sample.sampleForm?.join(", ")}
                             </div>
                           </div>
                         </div>
@@ -118,7 +134,7 @@ export default function SampleDetail() {
                               Building
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              CH
+                              {sample.storageBuilding}
                             </div>
                           </div>
                           <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -126,7 +142,7 @@ export default function SampleDetail() {
                               Room
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              room1
+                              {sample.storageRoom}
                             </div>
                           </div>
                           <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -134,7 +150,7 @@ export default function SampleDetail() {
                               Extra Details
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              ....
+                              {sample.storageDetails}
                             </div>
                           </div>
                           <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -142,7 +158,7 @@ export default function SampleDetail() {
                               Duration
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              10 years
+                              {sample.storageDuration}
                             </div>
                           </div>
                         </div>

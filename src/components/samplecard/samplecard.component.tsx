@@ -24,7 +24,10 @@ export default function samplecard(sample: Sample) {
   //   }
   // }
   return (
-    <Link href="/search/sampleDetail" className="cursor-pointer ">
+    <Link
+      href={`/search/sampleDetail/${sample.sampleId}`}
+      className="cursor-pointer "
+    >
       <div className="bg-white border border-gray-200 rounded-lg shadow  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
         <div className="flex items-stretch">
           <div className="basis-full">
