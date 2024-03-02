@@ -2,20 +2,8 @@
 import { Field, Formik, Form, FormikProps } from "formik";
 import SampleCard from "@/components/samplecard/samplecard.component";
 import { useState } from "react";
-import { Sample, API } from "@/services/api";
+import { Sample, API, SearchFilterParams } from "@/services/api";
 import Link from "next/link";
-
-interface InitialValuesForSearchFilters {
-  category: string;
-  collectorName: string;
-  advisorName: string;
-  collectionYear: string;
-  collectionReason: string;
-  sampleForm: string;
-  sampleType: string;
-  storageBuilding: string;
-  storageRoom: string;
-}
 
 export default function FilterSearch() {
   const [samples, setSamples] = useState<Sample[]>([]);
@@ -94,7 +82,7 @@ export default function FilterSearch() {
                           }}
                         >
                           {(
-                            props: FormikProps<InitialValuesForSearchFilters>
+                            props: FormikProps<SearchFilterParams>
                           ) => (
                             <Form>
                               <div className="divide-y divide-gray-200">
