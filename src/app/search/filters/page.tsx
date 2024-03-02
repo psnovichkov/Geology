@@ -3,6 +3,7 @@ import { Field, Formik, Form, FormikProps } from "formik";
 import SampleCard from "@/components/samplecard/samplecard.component";
 import { useState } from "react";
 import { Sample, API } from "@/services/api";
+import Link from "next/link";
 
 interface InitialValuesForSearchFilters {
   category: string;
@@ -37,11 +38,34 @@ export default function FilterSearch() {
               <div className="card-body">
                 <div>
                   <div className="grid md:grid-cols-4 md:gap-4">
+                    <div className="mb-4 md:mb-0 md:col-start-2 md:col-span-1 lg:col-start-2 lg:col-span-1">
+                      <div className="text-end">
+                        <Link href="/search/map">
+                          <button className="text-primary btn border-primary md:border-2 hover:bg-primary hover:text-white fill-current transition ease-out duration-500">
+                            <div className="">
+                              <span className="">Map Search</span>
+                            </div>
+                          </button>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="md:col-start-3 md:col-span-1 lg:col-start-3 lg:col-span-1">
+                      <div className="text-start">
+                        <Link href="/search/term">
+                          <button className="text-primary btn border-primary md:border-2 hover:bg-primary hover:text-white fill-current transition ease-out duration-500">
+                            <div className="">
+                              <span className="">Text Search</span>
+                            </div>
+                          </button>
+                        </Link>
+                      </div>
+                    </div>
                     <div className="col-start-1 col-span-4 px-2 py-4">
-                      <h1 className="text-center font-bold text-lg p-4">
+                      <h1 className="text-center font-bold text-lg px-4 shadow-md">
                         Advanced Filter Search
                       </h1>
                     </div>
+
                     <div className="col-start-1 col-span-1 border px-1 py-1">
                       <div className=" flex flex-col">
                         <div className="grid justify-center shadow-sm">
@@ -520,17 +544,16 @@ export default function FilterSearch() {
                         </Formik>
                       </div>
                     </div>
-                    <div className="grid">
-                      <div className="col-start-1 col-span-4">
-                        <div className="m-6 text-center">Search Results</div>
-                      </div>
-                      <div className="col-start-1 col-span-4">
-                        {samples.map((sample) => (
-                          <div key={sample.sampleId} className="mb-5">
-                            <SampleCard {...sample} />
-                          </div>
-                        ))}
-                      </div>
+
+                    <div className="grid col-start-2 col-span-3 background-filter">
+                      <div className="m-6 text-center">Search Results</div>
+                    </div>
+                    <div className="col-start-1 col-span-4">
+                      {samples.map((sample) => (
+                        <div key={sample.sampleId} className="mb-5">
+                          <SampleCard {...sample} />
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>

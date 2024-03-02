@@ -4,15 +4,38 @@ import React, { useState } from "react";
 import MyGoogleMap from "@/components/googleMap/googleMap.component";
 import { API, Sample, SearchLocationParams } from "@/services/api";
 import SampleCard from "@/components/samplecard/samplecard.component";
+import Link from "next/link";
 
 export default function SearchMap() {
   const [samples, setSamples] = useState<Sample[]>([]);
   return (
     <div>
+      <div className="grid md:grid-cols-4 md:gap-4 pb-4">
+        <div className="mb-4 md:mb-0 md:col-start-2 md:col-span-1 lg:col-start-2 lg:col-span-1">
+          <div className="text-end">
+            <Link href="/search/filters">
+              <button className="text-primary btn border-primary md:border-2 hover:bg-primary hover:text-white fill-current transition ease-out duration-500">
+                <div className="">
+                  <span className="">Filter Search</span>
+                </div>
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className="md:col-start-3 md:col-span-1 lg:col-start-3 lg:col-span-1">
+          <div className="text-start">
+            <Link href="/search/term">
+              <button className="text-primary btn border-primary md:border-2 hover:bg-primary hover:text-white fill-current transition ease-out duration-500">
+                <div className="">
+                  <span className="">Text Search</span>
+                </div>
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
       <div>
-        <h2 className="text-center mb-6 font-semibold text-2xl">
-          Search Sample
-        </h2>
+        <h2 className="text-center mb-6 font-semibold text-2xl">Map Search</h2>
       </div>
       <p className="text-center text-sm mb-2">
         Please use map rectangular control to select the area to search and

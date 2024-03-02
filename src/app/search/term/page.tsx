@@ -11,6 +11,7 @@ import SampleCard from "@/components/samplecard/samplecard.component";
 import { useState } from "react";
 import samplesMock from "../../../mock/results.json";
 import { Sample, API } from "@/services/api";
+import Link from "next/link";
 
 interface SampleTerm {
   searchterm: string;
@@ -22,8 +23,30 @@ export default function SearchTerm() {
   return (
     <div>
       <div className="grid md:grid-cols-6 md:gap-4">
+        <div className="mb-4 md:mb-0 md:col-start-3 md:col-span-1 lg:col-start-3 lg:col-span-1">
+          <div className="text-end">
+            <Link href="/search/filters">
+              <button className="text-primary btn border-primary md:border-2 hover:bg-primary hover:text-white fill-current transition ease-out duration-500">
+                <div className="">
+                  <span className="">Filter Search</span>
+                </div>
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className="md:col-start-4 md:col-span-1 lg:col-start-4 lg:col-span-1">
+          <div className="text-start">
+            <Link href="/search/map">
+              <button className="text-primary btn border-primary md:border-2 hover:bg-primary hover:text-white fill-current transition ease-out duration-500">
+                <div className="">
+                  <span className="">Map Search</span>
+                </div>
+              </button>
+            </Link>
+          </div>
+        </div>
         <div className="col-start-1 col-span-6 lg:col-start-2 lg:col-span-4">
-          <h1 className="text-center font-bold text-lg p-6">
+          <h1 className="text-center font-bold text-lg px-6 pt-4 pb-6">
             Search Inventory
           </h1>
         </div>
