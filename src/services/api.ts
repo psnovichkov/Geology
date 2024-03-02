@@ -58,9 +58,9 @@ export class API {
     "https://3d9e678b12.execute-api.us-east-1.amazonaws.com/prod";
   public static readonly API_KEY = "<YOUR_GoogleAPIKey_HERE>";
 
-  private static fetchGetData<S>(path: string): Promise<S> {
+  private static fetchGetDeleteData<S>(path: string, method: 'GET'|'DELETE'): Promise<S> {
     return fetch(API.API_URL + path, {
-      method: "GET",
+      method: method,
       headers: {
         "Content-Type": "application/json",
       },
@@ -118,12 +118,12 @@ export class API {
 
   // get sample by id and return Sample
   public static getSample(id: number): Promise<Sample> {
-    return this.fetchGetData<Sample>(`/samples/${id}`);
+    return this.fetchGetDeleteData<Sample>(`/samples/${id}`, 'GET');
   }
 
   // list all samples and return Sample[]
   public static listSamples(): Promise<Sample[]> {
-    return this.fetchGetData<Sample[]>("/samples");
+    return this.fetchGetDeleteData<Sample[]>("/samples", 'GET');
   }
 
   //add sample using POST
@@ -135,7 +135,7 @@ export class API {
 
   // delete Sample by id
   public static deleteSample(id: number): Promise<Sample> {
-    return this.fetchData<{"id":number}, Sample>(`/samples/${id}`, "DELETE", {"id":id});
+    return this.fetchGetDeleteData<Sample>(`/samples/${id}`, "DELETE");
   }
 
   // example of batch upload given the provided file that has samples
