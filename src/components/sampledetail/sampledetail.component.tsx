@@ -1,11 +1,11 @@
 import { Sample } from "@/services/api";
 
-export default function (sample: Sample) {
+export default function SampleDetail(sample: Sample) {
   return (
     <div className="flex flex-col">
-      <div className="items-center justify-between pt-2 pl-8 pr-8 pb-8 sm:pt-4 sm:pl-16 sm:pr-16 sm:pb-16">
+      <div className="items-center justify-between">
         <div className="grid md:grid-cols-6 md:gap-4">
-          <div className="col-start-0 col-span-12 md:col-start-1 md:col-span-6 lg:col-start-2 lg:col-span-4">
+          <div className="col-start-0 col-span-12 md:col-start-1 md:col-span-6 lg:col-start-1 lg:col-span-6">
             <div className="card hover:shadow-lg">
               <div className="card-body">
                 <div>

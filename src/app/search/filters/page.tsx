@@ -31,9 +31,9 @@ export default function FilterSearch() {
 
   return (
     <div className="flex flex-col">
-      <div className="items-center justify-between pt-2 pl-8 pr-8 pb-8 sm:pt-4 sm:pl-16 sm:pr-16 sm:pb-16">
+      <div className="items-center justify-between">
         <div className="grid md:grid-cols-6 md:gap-2">
-          <div className="col-start-0 col-span-12 md:col-start-1 md:col-span-6 lg:col-start-2 lg:col-span-4">
+          <div className="col-start-0 col-span-12 md:col-start-1 md:col-span-6 lg:col-start-1 lg:col-span-6">
             <div className="card hover:shadow-lg">
               <div className="card-body">
                 <div>
@@ -113,22 +113,22 @@ export default function FilterSearch() {
                                     >
                                       <g
                                         id="SVGRepo_bgCarrier"
-                                        stroke-width="0"
+                                        strokeWidth="0"
                                       />
 
                                       <g
                                         id="SVGRepo_tracerCarrier"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
 
                                       <g id="SVGRepo_iconCarrier">
                                         <path
                                           d="M6 12H18M12 6V18"
                                           stroke="#d1d5db"
-                                          stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
+                                          strokeWidth="2"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
                                         />
                                       </g>
                                     </svg>
@@ -164,22 +164,22 @@ export default function FilterSearch() {
                                     >
                                       <g
                                         id="SVGRepo_bgCarrier"
-                                        stroke-width="0"
+                                        strokeWidth="0"
                                       />
 
                                       <g
                                         id="SVGRepo_tracerCarrier"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
 
                                       <g id="SVGRepo_iconCarrier">
                                         <path
                                           d="M6 12H18M12 6V18"
                                           stroke="#d1d5db"
-                                          stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
+                                          strokeWidth="2"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
                                         />
                                       </g>
                                     </svg>
@@ -208,22 +208,22 @@ export default function FilterSearch() {
                                     >
                                       <g
                                         id="SVGRepo_bgCarrier"
-                                        stroke-width="0"
+                                        strokeWidth="0"
                                       />
 
                                       <g
                                         id="SVGRepo_tracerCarrier"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
 
                                       <g id="SVGRepo_iconCarrier">
                                         <path
                                           d="M6 12H18M12 6V18"
                                           stroke="#d1d5db"
-                                          stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
+                                          strokeWidth="2"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
                                         />
                                       </g>
                                     </svg>
@@ -252,22 +252,22 @@ export default function FilterSearch() {
                                     >
                                       <g
                                         id="SVGRepo_bgCarrier"
-                                        stroke-width="0"
+                                        strokeWidth="0"
                                       />
 
                                       <g
                                         id="SVGRepo_tracerCarrier"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
 
                                       <g id="SVGRepo_iconCarrier">
                                         <path
                                           d="M6 12H18M12 6V18"
                                           stroke="#d1d5db"
-                                          stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
+                                          strokeWidth="2"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
                                         />
                                       </g>
                                     </svg>
@@ -299,22 +299,22 @@ export default function FilterSearch() {
                                     >
                                       <g
                                         id="SVGRepo_bgCarrier"
-                                        stroke-width="0"
+                                        strokeWidth="0"
                                       />
 
                                       <g
                                         id="SVGRepo_tracerCarrier"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
 
                                       <g id="SVGRepo_iconCarrier">
                                         <path
                                           d="M6 12H18M12 6V18"
                                           stroke="#d1d5db"
-                                          stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
+                                          strokeWidth="2"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
                                         />
                                       </g>
                                     </svg>
@@ -346,22 +346,22 @@ export default function FilterSearch() {
                                     >
                                       <g
                                         id="SVGRepo_bgCarrier"
-                                        stroke-width="0"
+                                        strokeWidth="0"
                                       />
 
                                       <g
                                         id="SVGRepo_tracerCarrier"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
 
                                       <g id="SVGRepo_iconCarrier">
                                         <path
                                           d="M6 12H18M12 6V18"
                                           stroke="#d1d5db"
-                                          stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
+                                          strokeWidth="2"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
                                         />
                                       </g>
                                     </svg>
@@ -400,22 +400,22 @@ export default function FilterSearch() {
                                     >
                                       <g
                                         id="SVGRepo_bgCarrier"
-                                        stroke-width="0"
+                                        strokeWidth="0"
                                       />
 
                                       <g
                                         id="SVGRepo_tracerCarrier"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
 
                                       <g id="SVGRepo_iconCarrier">
                                         <path
                                           d="M6 12H18M12 6V18"
                                           stroke="#d1d5db"
-                                          stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
+                                          strokeWidth="2"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
                                         />
                                       </g>
                                     </svg>
@@ -450,22 +450,22 @@ export default function FilterSearch() {
                                     >
                                       <g
                                         id="SVGRepo_bgCarrier"
-                                        stroke-width="0"
+                                        strokeWidth="0"
                                       />
 
                                       <g
                                         id="SVGRepo_tracerCarrier"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
 
                                       <g id="SVGRepo_iconCarrier">
                                         <path
                                           d="M6 12H18M12 6V18"
                                           stroke="#d1d5db"
-                                          stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
+                                          strokeWidth="2"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
                                         />
                                       </g>
                                     </svg>
@@ -497,22 +497,22 @@ export default function FilterSearch() {
                                     >
                                       <g
                                         id="SVGRepo_bgCarrier"
-                                        stroke-width="0"
+                                        strokeWidth="0"
                                       />
 
                                       <g
                                         id="SVGRepo_tracerCarrier"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
 
                                       <g id="SVGRepo_iconCarrier">
                                         <path
                                           d="M6 12H18M12 6V18"
                                           stroke="#d1d5db"
-                                          stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
+                                          strokeWidth="2"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
                                         />
                                       </g>
                                     </svg>
