@@ -5,6 +5,7 @@ export interface Sample {
   category: string;
   collectorName: string;
   advisorName?: string;
+  advisorOtherName?: string;
   collectionYear?: number;
   collectionReason?: string[];
   collectionReasonOther?: string;

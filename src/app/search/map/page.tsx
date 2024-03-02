@@ -2,11 +2,15 @@
 import { Field, Formik, Form, FormikProps } from "formik";
 import React, { useState } from "react";
 import MyGoogleMap from "@/components/googleMap/googleMap.component";
+import Spinner from "@/components/spinner/spinner.component";
 import { API, Sample, SearchLocationParams } from "@/services/api";
 import SampleCard from "@/components/samplecard/samplecard.component";
+import Link from "next/link";
 
 export default function SearchMap() {
   const [samples, setSamples] = useState<Sample[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [init, setInit] = useState(false);
   return (
     <div>
       <div>
@@ -24,9 +28,20 @@ export default function SearchMap() {
         onSubmit={async (values, actions) => {
           console.log("=============== form values", values);
           actions.setSubmitting(true);
-          API.searchByLocation(values).then(() => {
-            actions.setSubmitting(false);
-          });
+          setLoading(true);
+          if (!init) {
+            setInit(true);
+          }
+          API.searchByLocation(values)
+            .then((response) => {
+              setSamples(response);
+              actions.setSubmitting(false);
+              setLoading(false);
+            })
+            .catch(() => {
+              actions.setSubmitting(false);
+              setLoading(false);
+            });
           // setTimeout(() => {
           //   actions.setSubmitting(false);
           // }, 100);
@@ -44,24 +59,38 @@ export default function SearchMap() {
               <button
                 type="submit"
                 className="bg-secondary-100 hover:bg-secondary-200 text-white font-bold py-2 px-4 rounded"
+                disabled={props.isSubmitting}
               >
-                SUBMIT
+                SEARCH
               </button>
             </div>
           </Form>
         )}
       </Formik>
       <div className="grid">
-        <div className="col-start-1 col-span-12">
-          <div className="m-6 text-center">Search Results</div>
-        </div>
-        <div className="col-start-1 col-span-12">
-          {samples.map((sample) => (
-            <div key={sample.sampleId} className="mb-5">
-              <SampleCard {...sample} />
-            </div>
-          ))}
-        </div>
+        {init && (
+          <div className="col-start-1 col-span-12">
+            <div className="m-6 text-center">Search Results</div>
+          </div>
+        )}
+        {loading && (
+          <div className="col-start-7">
+            <Spinner />
+          </div>
+        )}
+        {!loading && (
+          <div className="col-start-1 col-span-12">
+            {samples.length > 0 &&
+              samples.map((sample) => (
+                <Link key={sample.id} href={`/search/map/${sample.id}`}>
+                  <SampleCard {...sample} />
+                </Link>
+              ))}
+          </div>
+        )}
+        {!loading && samples.length === 0 && init && (
+          <div className="col-start-7">No Results Found</div>
+        )}
       </div>
     </div>
   );

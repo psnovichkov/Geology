@@ -1,26 +1,6 @@
-"use client";
-import { API, Sample } from "@/services/api";
-import { useEffect, useState } from "react";
+import { Sample } from "@/services/api";
 
-type Props = {
-  params: {
-    id: number;
-  };
-};
-
-export default function SampleDetails({ params }: Props) {
-  const [sample, setSample] = useState<Sample>();
-
-  useEffect(() => {
-    API.getSample(params.id).then((result) => {
-      setSample(result);
-    });
-  }, [params.id]);
-
-  if (!sample) {
-    return <div>Loading...</div>;
-  }
-
+export default function (sample: Sample) {
   return (
     <div className="flex flex-col">
       <div className="items-center justify-between pt-2 pl-8 pr-8 pb-8 sm:pt-4 sm:pl-16 sm:pr-16 sm:pb-16">
