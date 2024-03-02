@@ -113,7 +113,7 @@ export class API {
 
   // search by full text and return Sample[]
   public static searchByText(text: string): Promise<Sample[]> {
-    return this.fetchData<string, Sample[]>("/samples/search/fulltext", "POST", text);
+    return this.fetchData<{"text": string}, Sample[]>("/samples/search/fulltext", "POST", {"text":text});
   }
 
   // get sample by id and return Sample
@@ -135,7 +135,7 @@ export class API {
 
   // delete Sample by id
   public static deleteSample(id: number): Promise<Sample> {
-    return this.fetchData<number, Sample>(`/samples/${id}`, "DELETE", id);
+    return this.fetchData<{"id":number}, Sample>(`/samples/${id}`, "DELETE", {"id":id});
   }
 
   // example of batch upload given the provided file that has samples
