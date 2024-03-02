@@ -68,6 +68,19 @@ export default function SampleDetail(sample: Sample) {
                           </div>
                           <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <div className="text-sm font-medium leading-6 text-gray-900">
+                              Collection Reason
+                            </div>
+                            <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                              {sample.collectionReason &&
+                              sample.collectionReason.length > 0 ? (
+                                `${sample.collectionYear}`
+                              ) : (
+                                <div className="text-gray-300"> --N/A-- </div>
+                              )}
+                            </div>
+                          </div>
+                          <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <div className="text-sm font-medium leading-6 text-gray-900">
                               Collection Site Coordinates
                               {sample.locationMarkerlat ? " (Marker)" : ""}
                             </div>
@@ -121,7 +134,8 @@ export default function SampleDetail(sample: Sample) {
                               Type (s)
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              {sample.sampleType ? (
+                              {sample.sampleType &&
+                              sample.sampleType.length > 0 ? (
                                 `${sample.sampleType.join(", ")}`
                               ) : (
                                 <div className="text-gray-300"> --N/A-- </div>
@@ -134,7 +148,8 @@ export default function SampleDetail(sample: Sample) {
                               Form (s)
                             </div>
                             <div className="mt-1 text-sm justify-self-end leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              {sample.sampleForm ? (
+                              {sample.sampleForm &&
+                              sample.sampleForm.length > 0 ? (
                                 `${sample.sampleForm.join(", ")}`
                               ) : (
                                 <div className="text-gray-300"> --N/A-- </div>
