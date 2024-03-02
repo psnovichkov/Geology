@@ -18,7 +18,9 @@ export interface Sample {
   sampleTypeOther?: string;
   sampleImg?: string;
   storageBuilding?: string;
+  storageBuildingOther?: string;
   storageRoom?: string;
+  storageRoomOther?: string;
   storageDetails?: string;
   storageDuration?: number;
   locationRectangleBounds?: {
