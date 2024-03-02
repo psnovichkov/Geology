@@ -11,12 +11,10 @@ import SampleCard from "@/components/samplecard/samplecard.component";
 import Spinner from "@/components/spinner/spinner.component";
 import { useState } from "react";
 import samplesMock from "../../../mock/results.json";
-import { Sample, API } from "@/services/api";
+import { Sample, API, SearchFulltextParams } from "@/services/api";
 import Link from "next/link";
 
-interface SampleTerm {
-  searchterm: string;
-}
+
 
 export default function SearchTerm() {
   const [samples, setSamples] = useState<Sample[]>([]);
@@ -43,7 +41,7 @@ export default function SearchTerm() {
               if (!init) {
                 setInit(true);
               }
-              API.listSamples()
+              API.searchByText(values)
                 .then((result) => {
                   setSamples(result);
                   actions.setSubmitting(false);
@@ -59,7 +57,7 @@ export default function SearchTerm() {
               // }, 100);
             }}
           >
-            {(props: FormikProps<SampleTerm>) => (
+            {(props: FormikProps<SearchFulltextParams>) => (
               <Form>
                 <div className="grid md:grid-cols-6 md:gap-1">
                   <div className="col-start-1 col-span-5">
