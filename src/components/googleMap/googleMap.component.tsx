@@ -5,6 +5,8 @@ import {
   DrawingManager,
   useJsApiLoader,
   Libraries,
+  Marker,
+  Rectangle,
 } from "@react-google-maps/api";
 import React, { useState, memo, useCallback } from "react";
 import { useFormikContext } from "formik";
@@ -24,25 +26,28 @@ const googleApiKey: string = process.env.NEXT_PUBLIC_GOOGLE_API_KEY
   : "";
 
 type GoogleMapProps = {
-  mode: "search" | "create" | "show";
-  showDrawingControls?: boolean;
-  drawingModes?: google.maps.drawing.OverlayType[];
+  mode: "search" | "create" | "showrectangular" | "showpin";
 };
 
 export default memo(function MyGoogleMap(props: GoogleMapProps): JSX.Element {
   const { setFieldValue } = useFormikContext();
 
   const [libraries] = useState<Libraries>(["drawing"]);
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: googleApiKey,
     libraries: libraries,
   });
+
   const [overlay, setOverlay] =
     useState<google.maps.drawing.OverlayCompleteEvent>();
+
   const [map, setMap] = useState<google.maps.Map>();
+
   const [drawingManager, setDrawingManager] =
     useState<google.maps.drawing.DrawingManager>();
+
   const onMapLoad = useCallback(function callback(map: google.maps.Map) {
     // This is just an example of getting and using the map instance
     setMap(map);
@@ -64,9 +69,10 @@ export default memo(function MyGoogleMap(props: GoogleMapProps): JSX.Element {
   }, []);
 
   const handleOnRectangleComplete = (rectangle: google.maps.Rectangle) => {
-    console.log("##################", rectangle.getBounds());
-    setFieldValue("locationMarkerlat", null);
-    setFieldValue("locationMarkerlng", null);
+    if (props.mode === "create") {
+      setFieldValue("locationMarkerlat", null);
+      setFieldValue("locationMarkerlng", null);
+    }
     setFieldValue("locationRectangleBounds", rectangle.getBounds());
   };
 
@@ -91,8 +97,10 @@ export default memo(function MyGoogleMap(props: GoogleMapProps): JSX.Element {
   };
 
   const deleteOverlay = () => {
-    setFieldValue("locationMarkerlat", null);
-    setFieldValue("locationMarkerlng", null);
+    if (props.mode === "create") {
+      setFieldValue("locationMarkerlat", null);
+      setFieldValue("locationMarkerlng", null);
+    }
     setFieldValue("locationRectangleBounds", null);
     if (overlay) overlay.overlay?.setMap(null);
   };
@@ -121,37 +129,54 @@ export default memo(function MyGoogleMap(props: GoogleMapProps): JSX.Element {
         onLoad={onMapLoad}
         onUnmount={onUnmount}
       >
-        {/* <Marker
-          key={123}
-          position={{
-            lat: 42.880363,
-            lng: -112.452911,
-          }}
-        />
-        <Rectangle
-          bounds={{
-            south: 42.84462847867871,
-            west: -112.47006640885925,
-            north: 43.02158822992076,
-            east: -112.1761821315155,
-          }}
-        /> */}
-        <DrawingManager
-          drawingMode={google.maps.drawing?.OverlayType.RECTANGLE}
-          onRectangleComplete={handleOnRectangleComplete}
-          onMarkerComplete={handleOnMarkerComplete}
-          onOverlayComplete={handleOverlayComplete}
-          onLoad={onDrawingManagerLoad}
-          options={{
-            drawingControl: true,
-            drawingControlOptions: {
-              drawingModes: [
-                google.maps.drawing?.OverlayType.RECTANGLE,
-                google.maps.drawing?.OverlayType.MARKER,
-              ],
-            },
-          }}
-        />
+        {props.mode === "showpin" && (
+          <Marker
+            key={123}
+            position={{
+              lat: 42.880363,
+              lng: -112.452911,
+            }}
+          />
+        )}
+        {props.mode === "showrectangular" && (
+          <Rectangle
+            bounds={{
+              south: 42.84462847867871,
+              west: -112.47006640885925,
+              north: 43.02158822992076,
+              east: -112.1761821315155,
+            }}
+          />
+        )}
+        {(props.mode === "search" || props.mode === "create") && (
+          <DrawingManager
+            drawingMode={google.maps.drawing?.OverlayType.RECTANGLE}
+            onRectangleComplete={handleOnRectangleComplete}
+            onMarkerComplete={handleOnMarkerComplete}
+            onOverlayComplete={handleOverlayComplete}
+            onLoad={onDrawingManagerLoad}
+            options={
+              props.mode === "create"
+                ? {
+                    drawingControl: true,
+                    drawingControlOptions: {
+                      drawingModes: [
+                        google.maps.drawing?.OverlayType.RECTANGLE,
+                        google.maps.drawing?.OverlayType.MARKER,
+                      ],
+                    },
+                  }
+                : {
+                    drawingControl: true,
+                    drawingControlOptions: {
+                      drawingModes: [
+                        google.maps.drawing?.OverlayType.RECTANGLE,
+                      ],
+                    },
+                  }
+            }
+          />
+        )}
       </GoogleMap>
     </div>
   ) : (

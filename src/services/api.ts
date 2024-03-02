@@ -58,9 +58,9 @@ export class API {
     "https://3d9e678b12.execute-api.us-east-1.amazonaws.com/prod";
   public static readonly API_KEY = "<YOUR_GoogleAPIKey_HERE>";
 
-  private static fetchGetData<S>(path: string): Promise<S> {
+  private static fetchGetDeleteData<S>(path: string, method: 'GET'|'DELETE'): Promise<S> {
     return fetch(API.API_URL + path, {
-      method: "GET",
+      method: method,
       headers: {
         "Content-Type": "application/json",
       },
@@ -94,7 +94,7 @@ export class API {
   // search by SearchFilterParams and return Sample[]
   public static searchByFilter(params: SearchFilterParams): Promise<Sample[]> {
     return this.fetchData<SearchFilterParams, Sample[]>(
-      "/search",
+      "/samples/search/filters",
       "POST",
       params
     );
@@ -105,7 +105,7 @@ export class API {
     params: SearchLocationParams
   ): Promise<Sample[]> {
     return this.fetchData<SearchLocationParams, Sample[]>(
-      "/search",
+      "/samples/search/location",
       "POST",
       params
     );
@@ -113,17 +113,17 @@ export class API {
 
   // search by full text and return Sample[]
   public static searchByText(text: string): Promise<Sample[]> {
-    return this.fetchData<string, Sample[]>("/search", "POST", text);
+    return this.fetchData<{"text": string}, Sample[]>("/samples/search/fulltext", "POST", {"text":text});
   }
 
   // get sample by id and return Sample
   public static getSample(id: number): Promise<Sample> {
-    return this.fetchGetData<Sample>(`/samples/${id}`);
+    return this.fetchGetDeleteData<Sample>(`/samples/${id}`, 'GET');
   }
 
   // list all samples and return Sample[]
   public static listSamples(): Promise<Sample[]> {
-    return this.fetchGetData<Sample[]>("/samples");
+    return this.fetchGetDeleteData<Sample[]>("/samples", 'GET');
   }
 
   //add sample using POST
@@ -135,7 +135,7 @@ export class API {
 
   // delete Sample by id
   public static deleteSample(id: number): Promise<Sample> {
-    return this.fetchData<number, Sample>(`/samples/${id}`, "DELETE", id);
+    return this.fetchGetDeleteData<Sample>(`/samples/${id}`, "DELETE");
   }
 
   // example of batch upload given the provided file that has samples

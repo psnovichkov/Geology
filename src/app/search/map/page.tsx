@@ -1,10 +1,12 @@
 "use client";
 import { Field, Formik, Form, FormikProps } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import MyGoogleMap from "@/components/googleMap/googleMap.component";
-import { API, SearchLocationParams } from "@/services/api";
+import { API, Sample, SearchLocationParams } from "@/services/api";
+import SampleCard from "@/components/samplecard/samplecard.component";
 
 export default function SearchMap() {
+  const [samples, setSamples] = useState<Sample[]>([]);
   return (
     <div>
       <div>
@@ -22,12 +24,12 @@ export default function SearchMap() {
         onSubmit={async (values, actions) => {
           console.log("=============== form values", values);
           actions.setSubmitting(true);
-          // API.addSample(values).then(() => {
-          //   actions.setSubmitting(false);
-          // });
-          setTimeout(() => {
+          API.searchByLocation(values).then(() => {
             actions.setSubmitting(false);
-          }, 100);
+          });
+          // setTimeout(() => {
+          //   actions.setSubmitting(false);
+          // }, 100);
         }}
       >
         {(props: FormikProps<SearchLocationParams>) => (
@@ -38,9 +40,29 @@ export default function SearchMap() {
               </legend>
               <MyGoogleMap mode="search" />
             </fieldset>
+            <div className="text-center mt-2">
+              <button
+                type="submit"
+                className="bg-secondary-100 hover:bg-secondary-200 text-white font-bold py-2 px-4 rounded"
+              >
+                SUBMIT
+              </button>
+            </div>
           </Form>
         )}
       </Formik>
+      <div className="grid">
+        <div className="col-start-1 col-span-12">
+          <div className="m-6 text-center">Search Results</div>
+        </div>
+        <div className="col-start-1 col-span-12">
+          {samples.map((sample) => (
+            <div key={sample.sampleId} className="mb-5">
+              <SampleCard {...sample} />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
