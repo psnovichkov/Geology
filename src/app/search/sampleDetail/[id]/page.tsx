@@ -42,7 +42,7 @@ export default function SampleDetails({ params }: Props) {
                     </span>
                   </div>
                   <div className="mt-6 border-t border-gray-300">
-                    <dl className="divide-y divide-gray-200">
+                    <div className="divide-y divide-gray-200">
                       <div className="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <div className="text-sm font-medium leading-6 text-gray-900">
                           Collection Details
@@ -218,7 +218,7 @@ export default function SampleDetails({ params }: Props) {
                           </div>
                         </div>
                       </div>
-                    </dl>
+                    </div>
                   </div>
                 </div>
               </div>

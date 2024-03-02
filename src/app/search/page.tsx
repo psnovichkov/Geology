@@ -13,9 +13,6 @@ export default function Search() {
         <div>
           <Link href="/search/filters">Filters</Link>
         </div>
-        <div>
-          <Link href="/search/sampleDetail">Details</Link>
-        </div>
 
         <div>
           <Link href="/search/term">Description</Link>

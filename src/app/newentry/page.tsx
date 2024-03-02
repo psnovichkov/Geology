@@ -146,6 +146,13 @@ export default function NewEntry() {
                   <small className="font-thin text-sm block text-muted">
                     From the dropdown, select an Advisor.
                   </small>
+                  {props.values.advisorName === "other" && (
+                    <Field
+                      className="inline-input"
+                      type="text"
+                      name="collectionReasonOther"
+                    />
+                  )}
                 </div>
                 <div className="mb-3">
                   <label className="inline-block" htmlFor="collectionYear">
