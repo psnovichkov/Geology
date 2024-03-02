@@ -8,17 +8,16 @@ import {
   useField,
 } from "formik";
 import SampleCard from "@/components/samplecard/samplecard.component";
+import Spinner from "@/components/spinner/spinner.component";
 import { useState } from "react";
 import samplesMock from "../../../mock/results.json";
-import { Sample, API } from "@/services/api";
+import { Sample, API, SearchFulltextParams } from "@/services/api";
 import Link from "next/link";
-
-interface SampleTerm {
-  searchterm: string;
-}
 
 export default function SearchTerm() {
   const [samples, setSamples] = useState<Sample[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [init, setInit] = useState(false);
 
   return (
     <div>
@@ -58,17 +57,27 @@ export default function SearchTerm() {
             onSubmit={async (values, actions) => {
               console.log(values);
               actions.setSubmitting(true);
-              API.listSamples().then((result) => {
-                setSamples(result);
-                actions.setSubmitting(false);
-              });
+              setLoading(true);
+              if (!init) {
+                setInit(true);
+              }
+              API.searchByText(values)
+                .then((result) => {
+                  setSamples(result);
+                  actions.setSubmitting(false);
+                  setLoading(false);
+                })
+                .catch(() => {
+                  actions.setSubmitting(false);
+                  setLoading(false);
+                });
               // setTimeout(() => {
               //   setSamples(samplesMock);
               //   actions.setSubmitting(false);
               // }, 100);
             }}
           >
-            {(props: FormikProps<SampleTerm>) => (
+            {(props: FormikProps<SearchFulltextParams>) => (
               <Form>
                 <div className="grid md:grid-cols-6 md:gap-1">
                   <div className="col-start-1 col-span-5">
@@ -94,16 +103,29 @@ export default function SearchTerm() {
             )}
           </Formik>
           <div className="grid">
-            <div className="col-start-1 col-span-12">
-              <div className="m-6 text-center">Search Results</div>
-            </div>
-            <div className="col-start-1 col-span-12">
-              {samples.map((sample) => (
-                <div key={sample.sampleId} className="mb-5">
-                  <SampleCard {...sample} />
-                </div>
-              ))}
-            </div>
+            {init && (
+              <div className="col-start-1 col-span-12">
+                <div className="m-6 text-center">Search Results</div>
+              </div>
+            )}
+            {loading && (
+              <div className="col-start-7">
+                <Spinner />
+              </div>
+            )}
+            {!loading && (
+              <div className="col-start-1 col-span-12">
+                {samples.length > 0 &&
+                  samples.map((sample) => (
+                    <Link key={sample.id} href={`/search/term/${sample.id}`}>
+                      <SampleCard {...sample} />
+                    </Link>
+                  ))}
+              </div>
+            )}
+            {!loading && samples.length === 0 && init && (
+              <div className="col-start-7">No Results Found</div>
+            )}
           </div>
         </div>
       </div>

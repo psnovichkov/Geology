@@ -3,6 +3,25 @@ import { Field, Formik, Form, FormikProps } from "formik";
 import React from "react";
 import MyGoogleMap from "@/components/googleMap/googleMap.component";
 import { API, Sample } from "@/services/api";
+import * as Yup from "yup";
+import Link from "next/link";
+
+const NewSampleSchema = Yup.object().shape({
+  category: Yup.string().max(255, "Too Long!").required("Required"),
+  sampleId: Yup.string().max(255, "Too Long!").required("Required"),
+  collectorName: Yup.string().max(255, "Too Long!"),
+  advisorOtherName: Yup.string().max(255, "Too Long!"),
+  collectionYear: Yup.date(),
+  collectionReasonOther: Yup.string().max(255, "Too Long!"),
+  shortDescription: Yup.string().max(255, "Too Long!"),
+  longDescription: Yup.string().max(255, "Too Long!"),
+  sampleFormOther: Yup.string().max(255, "Too Long!"),
+  sampleTypeOther: Yup.string().max(255, "Too Long!"),
+  storageBuildingOther: Yup.string().max(255, "Too Long!"),
+  storageRoomOther: Yup.string().max(255, "Too Long!"),
+  storageDetails: Yup.string().max(255, "Too Long!"),
+  storageDuration: Yup.number(),
+});
 
 export default function NewEntry() {
   return (
@@ -23,6 +42,7 @@ export default function NewEntry() {
           sampleId: "",
           collectorName: "",
           advisorName: "",
+          advisorOtherName: "",
           collectionYear: 2024,
           collectionReason: [],
           collectionReasonOther: "",
@@ -35,10 +55,13 @@ export default function NewEntry() {
           sampleTypeOther: "",
           sampleImg: "",
           storageBuilding: "",
+          storageBuildingOther: "",
           storageRoom: "",
+          storageRoomOther: "",
           storageDetails: "",
           storageDuration: 10,
         }}
+        validationSchema={NewSampleSchema}
         onSubmit={async (values, actions) => {
           console.log("=============== form values", values);
           actions.setSubmitting(true);
@@ -67,6 +90,9 @@ export default function NewEntry() {
                     Please select one from the following.
                   </small>
                 </div>
+                {props.errors.category && props.touched.category ? (
+                  <div className="text-red-500">{props.errors.category}</div>
+                ) : null}
 
                 <div>
                   <label htmlFor="category">
@@ -104,6 +130,9 @@ export default function NewEntry() {
                     name="sampleId"
                     placeholder="enter sample id..."
                   />
+                  {props.errors.sampleId && props.touched.sampleId ? (
+                    <div className="text-red-500">{props.errors.sampleId}</div>
+                  ) : null}
                 </div>
                 <div className="">
                   <small className="font-thin text-sm block text-muted">
@@ -126,6 +155,11 @@ export default function NewEntry() {
                     name="collectorName"
                     placeholder="Enter full name here..."
                   />
+                  {props.errors.collectorName && props.touched.collectorName ? (
+                    <div className="text-red-500">
+                      {props.errors.collectorName}
+                    </div>
+                  ) : null}
                   <small className="font-thin text-sm block text-muted">
                     Enter full name as first and last name. ex. John Doe
                   </small>
@@ -139,6 +173,7 @@ export default function NewEntry() {
                     as="select"
                     className="inline-input"
                   >
+                    <option value="">Select</option>
                     <option value="Dave">Dave</option>
                     <option value="Ben">Ben</option>
                     <option value="Other">Other</option>
@@ -154,6 +189,28 @@ export default function NewEntry() {
                     />
                   )}
                 </div>
+                {props.values.advisorName === "Other" && (
+                  <div className="mb-3">
+                    <label className="inline-block" htmlFor="advisorOtherName">
+                      Other Adviser Name
+                    </label>
+                    <Field
+                      className="inline-input"
+                      type="text"
+                      name="advisorOtherName"
+                      placeholder="enter the name of the adviser"
+                    />
+                    {props.errors.advisorOtherName &&
+                    props.touched.advisorOtherName ? (
+                      <div className="text-red-500">
+                        {props.errors.advisorOtherName}
+                      </div>
+                    ) : null}
+                    <small className="font-thin text-sm block text-muted">
+                      Enter the name of the adviser.
+                    </small>
+                  </div>
+                )}
                 <div className="mb-3">
                   <label className="inline-block" htmlFor="collectionYear">
                     Year Collected
@@ -164,6 +221,12 @@ export default function NewEntry() {
                     name="collectionYear"
                     placeholder="enter the year this sample was collected"
                   />
+                  {props.errors.collectionYear &&
+                  props.touched.collectionYear ? (
+                    <div className="text-red-500">
+                      {props.errors.collectionYear}
+                    </div>
+                  ) : null}
                   <small className="font-thin text-sm block text-muted">
                     Enter the year of when this sample was collected.
                   </small>
@@ -220,11 +283,25 @@ export default function NewEntry() {
                       props.values.collectionReason.find(
                         (reason) => reason == "other"
                       ) === "other" && (
-                        <Field
-                          className="inline-input"
-                          type="text"
-                          name="collectionReasonOther"
-                        />
+                        <div className="mb-4">
+                          <label
+                            className="inline-block"
+                            htmlFor="advisorOtherName"
+                          >
+                            Other Purpose of Sample Collection
+                          </label>
+                          <Field
+                            className="inline-input"
+                            type="text"
+                            name="collectionReasonOther"
+                          />
+                          {props.errors.collectionReasonOther &&
+                          props.touched.collectionReasonOther ? (
+                            <div className="text-red-500">
+                              {props.errors.collectionReasonOther}
+                            </div>
+                          ) : null}
+                        </div>
                       )}
                   </div>
                 </div>
@@ -250,6 +327,12 @@ export default function NewEntry() {
                     name="shortDescription"
                     placeholder="Enter geologic name of sample here.."
                   />
+                  {props.errors.shortDescription &&
+                  props.touched.shortDescription ? (
+                    <div className="text-red-500">
+                      {props.errors.shortDescription}
+                    </div>
+                  ) : null}
                   <small className="font-thin text-sm block text-muted">
                     Enter a specific geologic name or a reference to the sample.
                     ex. quartz.
@@ -306,11 +389,25 @@ export default function NewEntry() {
                       props.values.sampleForm.find(
                         (reason) => reason == "other"
                       ) === "other" && (
-                        <Field
-                          className="inline-input"
-                          type="text"
-                          name="sampleFormOther"
-                        />
+                        <div className="mb-4">
+                          <label
+                            className="inline-block"
+                            htmlFor="advisorOtherName"
+                          >
+                            Other Sample Form
+                          </label>
+                          <Field
+                            className="inline-input"
+                            type="text"
+                            name="sampleFormOther"
+                          />
+                          {props.errors.sampleFormOther &&
+                          props.touched.sampleFormOther ? (
+                            <div className="text-red-500">
+                              {props.errors.sampleFormOther}
+                            </div>
+                          ) : null}
+                        </div>
                       )}
                   </div>
                 </div>
@@ -383,11 +480,25 @@ export default function NewEntry() {
                       props.values.sampleType.find(
                         (reason) => reason == "other"
                       ) === "other" && (
-                        <Field
-                          className="inline-input"
-                          type="text"
-                          name="sampleTypeOther"
-                        />
+                        <div className="mb-4">
+                          <label
+                            className="inline-block"
+                            htmlFor="advisorOtherName"
+                          >
+                            Other Sample Type
+                          </label>
+                          <Field
+                            className="inline-input"
+                            type="text"
+                            name="sampleTypeOther"
+                          />
+                          {props.errors.sampleTypeOther &&
+                          props.touched.sampleTypeOther ? (
+                            <div className="text-red-500">
+                              {props.errors.sampleTypeOther}
+                            </div>
+                          ) : null}
+                        </div>
                       )}
                   </div>
                 </div>
@@ -405,6 +516,12 @@ export default function NewEntry() {
                     name="longDescription"
                     placeholder="Describe the geologic details here..."
                   />
+                  {props.errors.longDescription &&
+                  props.touched.longDescription ? (
+                    <div className="text-red-500">
+                      {props.errors.longDescription}
+                    </div>
+                  ) : null}
                 </div>
               </fieldset>
 
@@ -421,6 +538,7 @@ export default function NewEntry() {
                     as="select"
                     className="inline-input"
                   >
+                    <option value="">Select</option>
                     <option value="PS">PS (Physical Science)</option>
                     <option value="CH">CH (Colonial Hall)</option>
                     <option value="Other">Other</option>
@@ -430,6 +548,24 @@ export default function NewEntry() {
                     stored in.
                   </small>
                 </div>
+                {props.values.storageBuilding === "Other" && (
+                  <div className="mb-4">
+                    <label className="inline-block" htmlFor="storageBuilding">
+                      Other Storage Building
+                    </label>
+                    <Field
+                      className="inline-input"
+                      type="text"
+                      name="storageBuildingOther"
+                    />
+                    {props.errors.storageBuildingOther &&
+                    props.touched.storageBuildingOther ? (
+                      <div className="text-red-500">
+                        {props.errors.storageBuildingOther}
+                      </div>
+                    ) : null}
+                  </div>
+                )}
                 <div className="mb-3">
                   <label className="inline-block" htmlFor="storageRoom">
                     Storage Room
@@ -439,15 +575,35 @@ export default function NewEntry() {
                     as="select"
                     className="inline-input"
                   >
+                    <option value="">Select</option>
                     <option value="1">Room #1</option>
                     <option value="2">Room #2</option>
                     <option value="3">Room #3</option>
+                    <option value="Other">Other</option>
                   </Field>
                   <small className="font-thin text-sm block text-muted">
                     From the dropdown, select which room this sample will be
                     stored in.
                   </small>
                 </div>
+                {props.values.storageRoom === "Other" && (
+                  <div className="mb-4">
+                    <label className="inline-block" htmlFor="storageRoomOther">
+                      Other Storage Room
+                    </label>
+                    <Field
+                      className="inline-input"
+                      type="text"
+                      name="storageRoomOther"
+                    />
+                    {props.errors.storageRoomOther &&
+                    props.touched.storageRoomOther ? (
+                      <div className="text-red-500">
+                        {props.errors.storageRoomOther}
+                      </div>
+                    ) : null}
+                  </div>
+                )}
 
                 <div className="mb-3">
                   <label className="inline-block" htmlFor="storageDetails">
@@ -459,6 +615,12 @@ export default function NewEntry() {
                     name="storageDetails"
                     placeholder="Enter any additional storage details here"
                   />
+                  {props.errors.storageDetails &&
+                  props.touched.storageDetails ? (
+                    <div className="text-red-500">
+                      {props.errors.storageDetails}
+                    </div>
+                  ) : null}
                 </div>
 
                 <div className="mb-3">
@@ -471,14 +633,31 @@ export default function NewEntry() {
                     name="storageDuration"
                     placeholder="Enter number of years this sample should be stored in dataase for."
                   />
+                  {props.errors.storageDuration &&
+                  props.touched.storageDuration ? (
+                    <div className="text-red-500">
+                      {props.errors.storageDuration}
+                    </div>
+                  ) : null}
                 </div>
               </fieldset>
               <div className="text-center mt-2">
+                <Link href="/">
+                  <button
+                    type="submit"
+                    className="bg-tertiary-100 hover:bg-tertiary-200 text-white font-bold py-2 px-4 rounded"
+                  >
+                    CANCEL
+                  </button>
+                </Link>
                 <button
                   type="submit"
-                  className="bg-secondary-100 hover:bg-secondary-200 text-white font-bold py-2 px-4 rounded"
+                  className="bg-secondary-100 hover:bg-secondary-200 text-white font-bold py-2 px-4 rounded ml-3"
                 >
                   SUBMIT
+                </button>
+                <button onClick={props.handleReset} className="ml-3">
+                  Reset
                 </button>
               </div>
             </fieldset>

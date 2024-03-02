@@ -5,6 +5,7 @@ export interface Sample {
   category: string;
   collectorName: string;
   advisorName?: string;
+  advisorOtherName?: string;
   collectionYear?: number;
   collectionReason?: string[];
   collectionReasonOther?: string;
@@ -17,7 +18,9 @@ export interface Sample {
   sampleTypeOther?: string;
   sampleImg?: string;
   storageBuilding?: string;
+  storageBuildingOther?: string;
   storageRoom?: string;
+  storageRoomOther?: string;
   storageDetails?: string;
   storageDuration?: number;
   locationRectangleBounds?: {
@@ -28,6 +31,10 @@ export interface Sample {
   } | null;
   locationMarkerlat?: number | null;
   locationMarkerlng?: number | null;
+}
+
+export interface SearchFulltextParams {
+    searchterm: string;
 }
 
 export interface SearchFilterParams {
@@ -112,8 +119,8 @@ export class API {
   }
 
   // search by full text and return Sample[]
-  public static searchByText(text: string): Promise<Sample[]> {
-    return this.fetchData<{"text": string}, Sample[]>("/samples/search/fulltext", "POST", {"text":text});
+  public static searchByText(params: SearchFulltextParams): Promise<Sample[]> {
+    return this.fetchData<SearchFulltextParams, Sample[]>("/samples/search/fulltext", "POST", params);
   }
 
   // get sample by id and return Sample
