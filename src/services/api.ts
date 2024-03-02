@@ -31,6 +31,10 @@ export interface Sample {
   locationMarkerlng?: number | null;
 }
 
+export interface SearchFulltextParams {
+    searchterm: string;
+}
+
 export interface SearchFilterParams {
   category: string;
   collectorName: string;
@@ -113,8 +117,8 @@ export class API {
   }
 
   // search by full text and return Sample[]
-  public static searchByText(text: string): Promise<Sample[]> {
-    return this.fetchData<{"text": string}, Sample[]>("/samples/search/fulltext", "POST", {"text":text});
+  public static searchByText(params: SearchFulltextParams): Promise<Sample[]> {
+    return this.fetchData<SearchFulltextParams, Sample[]>("/samples/search/fulltext", "POST", params);
   }
 
   // get sample by id and return Sample
