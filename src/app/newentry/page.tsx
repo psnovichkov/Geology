@@ -4,6 +4,7 @@ import React from "react";
 import MyGoogleMap from "@/components/googleMap/googleMap.component";
 import { API, Sample } from "@/services/api";
 import * as Yup from "yup";
+import Link from "next/link";
 
 const NewSampleSchema = Yup.object().shape({
   category: Yup.string().max(255, "Too Long!").required("Required"),
@@ -634,9 +635,17 @@ export default function NewEntry() {
                 </div>
               </fieldset>
               <div className="text-center mt-2">
+                <Link href="/">
+                  <button
+                    type="submit"
+                    className="bg-tertiary-100 hover:bg-tertiary-200 text-white font-bold py-2 px-4 rounded"
+                  >
+                    CANCEL
+                  </button>
+                </Link>
                 <button
                   type="submit"
-                  className="bg-secondary-100 hover:bg-secondary-200 text-white font-bold py-2 px-4 rounded"
+                  className="bg-secondary-100 hover:bg-secondary-200 text-white font-bold py-2 px-4 rounded ml-3"
                 >
                   SUBMIT
                 </button>

@@ -19,6 +19,10 @@ const config: Config = {
           100: "#dda15e",
           200: "#bd7828",
         },
+        tertiary: {
+          100: "#d4c6b6",
+          200: "#d1bfa9"
+        }
       },
       fontFamily: {
         body: ["Nunito"],
