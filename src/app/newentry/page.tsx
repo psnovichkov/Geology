@@ -14,7 +14,7 @@ const NewSampleSchema = Yup.object().shape({
   collectionYear: Yup.date(),
   collectionReasonOther: Yup.string().max(255, "Too Long!"),
   shortDescription: Yup.string().max(255, "Too Long!"),
-  longDescription: Yup.string().max(255, "Too Long!"),
+  longDescription: Yup.string().max(255, "Too Long!").required("Required"),
   sampleFormOther: Yup.string().max(255, "Too Long!"),
   sampleTypeOther: Yup.string().max(255, "Too Long!"),
   storageBuildingOther: Yup.string().max(255, "Too Long!"),
@@ -120,7 +120,7 @@ export default function NewEntry() {
                 {/* <hr className="h-px my-2" /> */}
                 <div>
                   <label className="block" htmlFor="sampleId">
-                    Sample ID
+                    Sample ID *
                   </label>
                 </div>
                 <div>
@@ -508,11 +508,12 @@ export default function NewEntry() {
                 </div>
                 <div className="mb-3">
                   <label className="inline-block" htmlFor="longDescription">
-                    Detailed Description
+                    Detailed Description *
                   </label>
                   <Field
                     className="inline-input"
-                    type="textarea"
+                    component="textarea"
+                    rows="3"
                     name="longDescription"
                     placeholder="Describe the geologic details here..."
                   />

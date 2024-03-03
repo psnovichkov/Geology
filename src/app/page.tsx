@@ -30,7 +30,7 @@ export default function Home() {
                   <div className="grid md:grid-cols-6 md:gap-4">
                     <div className="mb-4 md:mb-0 md:col-start-1 md:col-span-3 lg:col-start-1 lg:col-span-3">
                       <div className="text-center">
-                        <Link href="/search">
+                        <Link href="/search/term">
                           <button className="text-primary btn border-primary md:border-2 hover:bg-primary hover:text-white fill-current transition ease-out duration-500">
                             <div className="">
                               <span className="">Search the Database </span>

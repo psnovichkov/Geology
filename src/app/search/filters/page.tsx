@@ -4,6 +4,7 @@ import SampleCard from "@/components/samplecard/samplecard.component";
 import { useState } from "react";
 import { Sample, API, SearchFilterParams } from "@/services/api";
 import Link from "next/link";
+import SpinnerComponent from "@/components/spinner/spinner.component";
 
 export default function FilterSearch() {
   const [samples, setSamples] = useState<Sample[]>([]);
@@ -16,6 +17,8 @@ export default function FilterSearch() {
   const [toggleType, setToggleType] = useState<boolean>(false);
   const [toggleBuidling, setToggleBuilding] = useState<boolean>(false);
   const [toggleRoom, setToggleRoom] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+  const [init, setInit] = useState(false);
 
   return (
     <div className="flex flex-col">
@@ -54,12 +57,8 @@ export default function FilterSearch() {
                       </h1>
                     </div>
 
-                    <div className="col-start-1 col-span-1 border px-1 py-1">
+                    <div className="col-start-1 col-span-1 border px-1 py-1 rounded">
                       <div className=" flex flex-col">
-                        <div className="grid justify-center shadow-sm">
-                          <div className="font-bold py-2 px-4">filters</div>
-                        </div>
-
                         <Formik
                           initialValues={{
                             category: "",
@@ -75,16 +74,36 @@ export default function FilterSearch() {
                           onSubmit={async (values, actions) => {
                             console.log(values);
                             actions.setSubmitting(true);
-                            API.searchByFilter(values).then((result) => {
-                              setSamples(result);
-                              actions.setSubmitting(false);
-                            });
+                            setLoading(true);
+                            if (!init) {
+                              setInit(true);
+                            }
+                            API.searchByFilter(values)
+                              .then((result) => {
+                                setSamples(result);
+                                actions.setSubmitting(false);
+                                setLoading(false);
+                              })
+                              .catch(() => {
+                                actions.setSubmitting(false);
+                                setLoading(false);
+                              });
                           }}
                         >
-                          {(
-                            props: FormikProps<SearchFilterParams>
-                          ) => (
+                          {(props: FormikProps<SearchFilterParams>) => (
                             <Form>
+                              <div className="flex justify-between shadow-sm">
+                                <div className="font-bold py-2 px-4">
+                                  filters
+                                </div>
+
+                                <button
+                                  onClick={props.handleReset}
+                                  className="ml-3 border rounded justify-self-end"
+                                >
+                                  Reset
+                                </button>
+                              </div>
                               <div className="divide-y divide-gray-200">
                                 <div className="px-2 py-2">
                                   <div className=" flex flex-row justify-between">
@@ -128,6 +147,7 @@ export default function FilterSearch() {
                                       as="select"
                                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
+                                      <option value="">select</option>
                                       <option value="singleSpecimen">
                                         Single Specimen
                                       </option>
@@ -532,17 +552,47 @@ export default function FilterSearch() {
                         </Formik>
                       </div>
                     </div>
-
-                    <div className="grid col-start-2 col-span-3 background-filter">
-                      <div className="m-6 text-center">Search Results</div>
-                    </div>
-                    <div className="col-start-1 col-span-4">
-                      {samples.map((sample) => (
-                        <div key={sample.sampleId} className="mb-5">
-                          <SampleCard {...sample} />
+                    <div className="grid col-start-2 col-span-3 background-filter rounded">
+                      {init && (
+                        <div className="col-start-1 col-span-12">
+                          <div className="m-6 text-center">Search Results</div>
                         </div>
-                      ))}
+                      )}
+                      {loading && (
+                        <div className="col-start-7">
+                          <SpinnerComponent />
+                        </div>
+                      )}
+                      {!loading && (
+                        <div className="col-start-1 col-span-12">
+                          {samples.length > 0 &&
+                            samples.map((sample) => (
+                              <Link
+                                key={sample.id}
+                                href={`/search/filters/${sample.id}`}
+                              >
+                                <div className="m-2">
+                                  <SampleCard {...sample} />
+                                </div>
+                              </Link>
+                            ))}
+                        </div>
+                      )}
+                      {!loading && samples.length === 0 && init && (
+                        <div className="col-start-7">No Results Found</div>
+                      )}
                     </div>
+                    {/* <div className="">
+                      <div className="m-6 text-center">Search Results</div>
+
+                      <div className="col-start-1 col-span-4">
+                        {samples.map((sample) => (
+                          <div key={sample.sampleId} className="mb-5">
+                            <SampleCard {...sample} />
+                          </div>
+                        ))}
+                      </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
