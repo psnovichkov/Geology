@@ -1,4 +1,3 @@
-// create interface
 export interface Sample {
   id?: number;
   sampleId: string;
