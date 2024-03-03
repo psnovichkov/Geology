@@ -642,6 +642,11 @@ export default function NewEntry() {
                   ) : null}
                 </div>
               </fieldset>
+              {!props.isValid && props.initialTouched && (
+                <div className="text-center mt-2 text-red-500">
+                  CORRECT ERRORS
+                </div>
+              )}
               <div className="text-center mt-2">
                 <Link href="/">
                   <button
